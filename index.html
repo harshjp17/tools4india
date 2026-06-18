@@ -1,0 +1,1088 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ToolsIndia — Free Indian Utility Tools</title>
+<meta name="description" content="Free online tools for Indians — GST Calculator, EMI Calculator, Income Tax, PDF tools, Resume Builder and more.">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #F8F9FC;
+    --surface: #FFFFFF;
+    --border: #E4E7EF;
+    --accent: #3B6EF6;
+    --accent-light: #EEF2FF;
+    --accent-dark: #2952D9;
+    --text-primary: #111827;
+    --text-secondary: #6B7280;
+    --text-tertiary: #9CA3AF;
+    --success: #059669;
+    --success-bg: #ECFDF5;
+    --warning: #D97706;
+    --warning-bg: #FFFBEB;
+    --sidebar-w: 260px;
+    --header-h: 58px;
+    --radius: 10px;
+    --radius-lg: 14px;
+    --shadow: 0 1px 3px rgba(0,0,0,0.07), 0 1px 2px rgba(0,0,0,0.04);
+    --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+  }
+
+  body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text-primary); min-height: 100vh; }
+
+  /* ── Header ── */
+  header {
+    position: fixed; top: 0; left: 0; right: 0; height: var(--header-h);
+    background: var(--surface); border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; padding: 0 1.25rem; gap: 1rem; z-index: 100;
+    box-shadow: var(--shadow);
+  }
+  .logo { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 18px; font-weight: 700; color: var(--accent); text-decoration: none; display: flex; align-items: center; gap: 8px; }
+  .logo-icon { width: 30px; height: 30px; background: var(--accent); border-radius: 8px; display: flex; align-items: center; justify-content: center; }
+  .logo-icon svg { width: 16px; height: 16px; fill: white; }
+  .header-tagline { font-size: 12px; color: var(--text-tertiary); border-left: 1px solid var(--border); padding-left: 1rem; margin-left: auto; display: none; }
+  @media(min-width:640px){ .header-tagline { display: block; } }
+  .menu-btn { display: none; background: none; border: none; cursor: pointer; padding: 6px; border-radius: 6px; color: var(--text-secondary); }
+  .menu-btn:hover { background: var(--bg); }
+  @media(max-width:768px){ .menu-btn { display: flex; align-items: center; margin-left: auto; } }
+
+  /* ── Sidebar ── */
+  aside {
+    position: fixed; top: var(--header-h); left: 0; bottom: 0;
+    width: var(--sidebar-w); background: var(--surface);
+    border-right: 1px solid var(--border); overflow-y: auto;
+    padding: 1rem 0; transition: transform .25s ease; z-index: 90;
+  }
+  aside::-webkit-scrollbar { width: 4px; }
+  aside::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+  @media(max-width:768px){ aside { transform: translateX(-100%); } aside.open { transform: translateX(0); box-shadow: var(--shadow-md); } }
+
+  .nav-section { padding: 0 0.75rem 0.5rem; }
+  .nav-label { font-size: 10px; font-weight: 600; letter-spacing: 0.08em; color: var(--text-tertiary); text-transform: uppercase; padding: 0.5rem 0.5rem 0.35rem; }
+  .nav-item {
+    display: flex; align-items: center; gap: 10px; padding: 9px 12px;
+    border-radius: 8px; cursor: pointer; font-size: 13.5px; color: var(--text-secondary);
+    transition: all .15s; border: none; background: none; width: 100%; text-align: left;
+  }
+  .nav-item:hover { background: var(--bg); color: var(--text-primary); }
+  .nav-item.active { background: var(--accent-light); color: var(--accent); font-weight: 500; }
+  .nav-item .nav-icon { width: 28px; height: 28px; border-radius: 6px; background: var(--bg); display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; }
+  .nav-item.active .nav-icon { background: var(--accent-light); }
+
+  /* ── Main ── */
+  main { margin-left: var(--sidebar-w); margin-top: var(--header-h); padding: 2rem 1.5rem; min-height: calc(100vh - var(--header-h)); }
+  @media(max-width:768px){ main { margin-left: 0; padding: 1.25rem 1rem; } }
+
+  /* ── Tool Panel ── */
+  .tool-panel { display: none; max-width: 780px; }
+  .tool-panel.active { display: block; }
+  .tool-header { margin-bottom: 1.5rem; }
+  .tool-eyebrow { font-size: 11px; font-weight: 600; letter-spacing: 0.07em; text-transform: uppercase; color: var(--accent); margin-bottom: 6px; }
+  .tool-title { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 24px; font-weight: 700; color: var(--text-primary); }
+  .tool-desc { font-size: 14px; color: var(--text-secondary); margin-top: 4px; line-height: 1.6; }
+
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 1.5rem; box-shadow: var(--shadow); }
+  .card + .card { margin-top: 1rem; }
+
+  /* ── Form Elements ── */
+  .field { margin-bottom: 1rem; }
+  .field:last-child { margin-bottom: 0; }
+  label { display: block; font-size: 13px; font-weight: 500; color: var(--text-secondary); margin-bottom: 5px; }
+  input[type=number], input[type=text], input[type=date], select, textarea {
+    width: 100%; padding: 9px 12px; border: 1px solid var(--border); border-radius: var(--radius);
+    font-size: 14px; font-family: inherit; color: var(--text-primary); background: var(--bg);
+    transition: border-color .15s; outline: none;
+  }
+  input:focus, select:focus, textarea:focus { border-color: var(--accent); background: white; box-shadow: 0 0 0 3px rgba(59,110,246,0.1); }
+  input[type=range] { width: 100%; accent-color: var(--accent); cursor: pointer; }
+
+  .btn {
+    display: inline-flex; align-items: center; gap: 6px; padding: 10px 20px;
+    background: var(--accent); color: white; border: none; border-radius: var(--radius);
+    font-size: 14px; font-weight: 500; font-family: inherit; cursor: pointer; transition: all .15s;
+  }
+  .btn:hover { background: var(--accent-dark); transform: translateY(-1px); }
+  .btn:active { transform: translateY(0); }
+  .btn-outline { background: none; color: var(--accent); border: 1px solid var(--accent); }
+  .btn-outline:hover { background: var(--accent-light); transform: none; }
+  .btn-sm { padding: 7px 14px; font-size: 13px; }
+
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; }
+  @media(max-width:540px){ .grid-2, .grid-3 { grid-template-columns: 1fr; } }
+
+  /* ── Result Box ── */
+  .result-box { background: var(--accent-light); border: 1px solid #C7D7FD; border-radius: var(--radius); padding: 1.25rem; margin-top: 1rem; }
+  .result-box.success { background: var(--success-bg); border-color: #A7F3D0; }
+  .result-box.warning { background: var(--warning-bg); border-color: #FDE68A; }
+  .result-label { font-size: 12px; font-weight: 500; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.06em; }
+  .result-value { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 28px; font-weight: 700; color: var(--accent); margin: 4px 0; }
+  .result-value.success { color: var(--success); }
+  .result-sub { font-size: 13px; color: var(--text-secondary); }
+
+  .stat-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px; margin-top: 1rem; }
+  .stat-card { background: white; border: 1px solid var(--border); border-radius: var(--radius); padding: 0.875rem 1rem; }
+  .stat-card .s-label { font-size: 11px; color: var(--text-tertiary); margin-bottom: 3px; }
+  .stat-card .s-value { font-size: 17px; font-weight: 600; color: var(--text-primary); }
+
+  /* ── AdSense Placeholder ── */
+  .ad-slot { background: var(--bg); border: 1px dashed var(--border); border-radius: var(--radius); padding: 1rem; text-align: center; font-size: 12px; color: var(--text-tertiary); margin: 1.25rem 0; min-height: 90px; display: flex; align-items: center; justify-content: center; }
+
+  /* ── PDF Tool ── */
+  .drop-zone { border: 2px dashed var(--border); border-radius: var(--radius-lg); padding: 2.5rem 1.5rem; text-align: center; cursor: pointer; transition: all .2s; background: var(--bg); }
+  .drop-zone:hover, .drop-zone.drag-over { border-color: var(--accent); background: var(--accent-light); }
+  .drop-zone svg { width: 40px; height: 40px; stroke: var(--text-tertiary); margin-bottom: 0.75rem; }
+  .drop-zone.drag-over svg { stroke: var(--accent); }
+  .drop-zone p { font-size: 14px; color: var(--text-secondary); }
+  .drop-zone span { font-size: 12px; color: var(--text-tertiary); }
+
+  /* ── Resume ── */
+  .resume-preview { background: white; border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; font-size: 13px; line-height: 1.6; }
+  .resume-preview h2 { font-size: 20px; font-weight: 700; color: var(--text-primary); }
+  .resume-preview h3 { font-size: 13px; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: 0.06em; border-bottom: 1px solid var(--border); padding-bottom: 4px; margin: 14px 0 8px; }
+  .resume-preview p { color: var(--text-secondary); font-size: 12.5px; margin: 2px 0; }
+  .resume-preview .contact-line { color: var(--text-tertiary); font-size: 12px; }
+
+  /* ── Home grid ── */
+  .home-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; }
+  .home-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 1.25rem 1.25rem 1rem; cursor: pointer; transition: all .18s; box-shadow: var(--shadow); }
+  .home-card:hover { box-shadow: var(--shadow-md); border-color: #C7D7FD; transform: translateY(-2px); }
+  .home-card .hc-icon { font-size: 26px; margin-bottom: 10px; }
+  .home-card .hc-name { font-size: 14px; font-weight: 600; color: var(--text-primary); margin-bottom: 4px; }
+  .home-card .hc-desc { font-size: 12px; color: var(--text-secondary); line-height: 1.5; }
+  .home-card .hc-badge { display: inline-block; margin-top: 8px; font-size: 10px; font-weight: 600; padding: 2px 8px; border-radius: 10px; background: var(--accent-light); color: var(--accent); }
+
+  /* progress bar */
+  .prog-bar { height: 8px; background: var(--border); border-radius: 4px; overflow: hidden; margin: 6px 0; }
+  .prog-bar-fill { height: 100%; background: var(--accent); border-radius: 4px; transition: width .4s; }
+
+  /* table */
+  table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 0.75rem; }
+  th { background: var(--bg); font-weight: 600; font-size: 12px; color: var(--text-secondary); padding: 8px 10px; text-align: left; border-bottom: 1px solid var(--border); }
+  td { padding: 8px 10px; border-bottom: 1px solid var(--bg); }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: var(--bg); }
+
+  /* toggle */
+  .toggle-group { display: flex; border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; background: var(--bg); }
+  .toggle-btn { flex: 1; padding: 8px 12px; font-size: 13px; font-family: inherit; border: none; background: none; cursor: pointer; color: var(--text-secondary); transition: all .15s; }
+  .toggle-btn.active { background: var(--accent); color: white; font-weight: 500; }
+
+  .divider { border: none; border-top: 1px solid var(--border); margin: 1.25rem 0; }
+
+  /* file list */
+  .file-item { display: flex; align-items: center; gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--bg); font-size: 13px; }
+  .file-item:last-child { border-bottom: none; }
+  .file-size { font-size: 11px; color: var(--text-tertiary); margin-left: auto; }
+  .file-remove { background: none; border: none; cursor: pointer; color: var(--text-tertiary); font-size: 16px; padding: 2px 6px; border-radius: 4px; }
+  .file-remove:hover { color: #DC2626; background: #FEE2E2; }
+
+  .tag { display: inline-block; font-size: 11px; padding: 2px 8px; border-radius: 10px; background: var(--bg); border: 1px solid var(--border); color: var(--text-secondary); margin: 2px; }
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<header>
+  <a class="logo" href="#" onclick="showTool('home')">
+    <div class="logo-icon">
+      <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+    </div>
+    ToolsIndia
+  </a>
+  <span class="header-tagline">10 Free Tools for Every Indian</span>
+  <button class="menu-btn" onclick="toggleSidebar()" aria-label="Toggle menu">
+    <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+  </button>
+</header>
+
+<!-- Sidebar -->
+<aside id="sidebar">
+  <div class="nav-section">
+    <div class="nav-label">Home</div>
+    <button class="nav-item active" id="nav-home" onclick="showTool('home')">
+      <span class="nav-icon">🏠</span> All Tools
+    </button>
+  </div>
+  <div class="nav-section">
+    <div class="nav-label">Finance & Tax</div>
+    <button class="nav-item" id="nav-gst" onclick="showTool('gst')"><span class="nav-icon">🧾</span> GST Calculator</button>
+    <button class="nav-item" id="nav-emi" onclick="showTool('emi')"><span class="nav-icon">🏦</span> EMI Calculator</button>
+    <button class="nav-item" id="nav-tax" onclick="showTool('tax')"><span class="nav-icon">📊</span> Income Tax</button>
+  </div>
+  <div class="nav-section">
+    <div class="nav-label">Documents</div>
+    <button class="nav-item" id="nav-pdf" onclick="showTool('pdf')"><span class="nav-icon">📄</span> PDF Compressor</button>
+    <button class="nav-item" id="nav-resume" onclick="showTool('resume')"><span class="nav-icon">📋</span> Resume Builder</button>
+    <button class="nav-item" id="nav-invoice" onclick="showTool('invoice')"><span class="nav-icon">🧾</span> Invoice Generator</button>
+  </div>
+  <div class="nav-section">
+    <div class="nav-label">Utilities</div>
+    <button class="nav-item" id="nav-age" onclick="showTool('age')"><span class="nav-icon">🎂</span> Age Calculator</button>
+    <button class="nav-item" id="nav-cgpa" onclick="showTool('cgpa')"><span class="nav-icon">🎓</span> CGPA Converter</button>
+    <button class="nav-item" id="nav-img" onclick="showTool('img')"><span class="nav-icon">🖼️</span> Image Compressor</button>
+    <button class="nav-item" id="nav-hindi" onclick="showTool('hindi')"><span class="nav-icon">🔤</span> Hindi Typing</button>
+  </div>
+</aside>
+
+<!-- Main Content -->
+<main>
+
+<!-- ═══════════ HOME ═══════════ -->
+<div class="tool-panel active" id="panel-home">
+  <div class="tool-header">
+    <div class="tool-eyebrow">ToolsIndia</div>
+    <div class="tool-title">Free Tools for Every Indian 🇮🇳</div>
+    <div class="tool-desc">GST se lekar Resume tak — sab kuch ek jagah, bilkul free.</div>
+  </div>
+  <div class="home-grid">
+    <div class="home-card" onclick="showTool('gst')"><div class="hc-icon">🧾</div><div class="hc-name">GST Calculator</div><div class="hc-desc">CGST, SGST, IGST breakup with invoice value</div><span class="hc-badge">Most Used</span></div>
+    <div class="home-card" onclick="showTool('emi')"><div class="hc-icon">🏦</div><div class="hc-name">EMI Calculator</div><div class="hc-desc">Home, Car, Personal loan EMI with schedule</div><span class="hc-badge">High Traffic</span></div>
+    <div class="home-card" onclick="showTool('tax')"><div class="hc-icon">📊</div><div class="hc-name">Income Tax</div><div class="hc-desc">Old vs New regime — FY 2024-25</div><span class="hc-badge">Tax Season</span></div>
+    <div class="home-card" onclick="showTool('pdf')"><div class="hc-icon">📄</div><div class="hc-name">PDF Compressor</div><div class="hc-desc">Compress & merge PDF for government portals</div></div>
+    <div class="home-card" onclick="showTool('resume')"><div class="hc-icon">📋</div><div class="hc-name">Resume Builder</div><div class="hc-desc">ATS-friendly resume, download as PDF</div></div>
+    <div class="home-card" onclick="showTool('invoice')"><div class="hc-icon">🧾</div><div class="hc-name">Invoice Generator</div><div class="hc-desc">GST invoice for freelancers & small shops</div></div>
+    <div class="home-card" onclick="showTool('age')"><div class="hc-icon">🎂</div><div class="hc-name">Age Calculator</div><div class="hc-desc">Exact age in years, months & days</div></div>
+    <div class="home-card" onclick="showTool('cgpa')"><div class="hc-icon">🎓</div><div class="hc-name">CGPA Converter</div><div class="hc-desc">GTU, VTU, Mumbai Uni & more</div></div>
+    <div class="home-card" onclick="showTool('img')"><div class="hc-icon">🖼️</div><div class="hc-name">Image Compressor</div><div class="hc-desc">Compress images for govt portals (50KB limit)</div></div>
+    <div class="home-card" onclick="showTool('hindi')"><div class="hc-icon">🔤</div><div class="hc-name">Hindi Typing</div><div class="hc-desc">Type in Hinglish, get Devanagari Hindi</div></div>
+  </div>
+  <div class="ad-slot" style="margin-top:1.5rem">📢 Google AdSense — 728×90 Leaderboard Ad</div>
+</div>
+
+<!-- ═══════════ GST CALCULATOR ═══════════ -->
+<div class="tool-panel" id="panel-gst">
+  <div class="tool-header">
+    <div class="tool-eyebrow">Finance Tool</div>
+    <div class="tool-title">GST Calculator</div>
+    <div class="tool-desc">Calculate GST amount, CGST/SGST breakup, and final invoice value instantly.</div>
+  </div>
+  <div class="ad-slot">📢 AdSense — 728×90 Banner</div>
+  <div class="card">
+    <div class="toggle-group" style="margin-bottom:1.25rem">
+      <button class="toggle-btn active" id="gst-add-btn" onclick="setGSTMode('add')">Add GST to Amount</button>
+      <button class="toggle-btn" id="gst-rem-btn" onclick="setGSTMode('remove')">Remove GST from Amount</button>
+    </div>
+    <div class="grid-2">
+      <div class="field">
+        <label>Amount (₹)</label>
+        <input type="number" id="gst-amount" placeholder="Enter amount" oninput="calcGST()">
+      </div>
+      <div class="field">
+        <label>GST Rate</label>
+        <select id="gst-rate" onchange="calcGST()">
+          <option value="5">5% — Essential goods</option>
+          <option value="12">12% — Standard goods</option>
+          <option value="18" selected>18% — Most services</option>
+          <option value="28">28% — Luxury goods</option>
+          <option value="0">0% — Exempt</option>
+        </select>
+      </div>
+    </div>
+    <div class="field">
+      <label>Transaction Type</label>
+      <select id="gst-type" onchange="calcGST()">
+        <option value="intra">Intra-state (CGST + SGST)</option>
+        <option value="inter">Inter-state (IGST)</option>
+      </select>
+    </div>
+    <div id="gst-result" style="display:none">
+      <hr class="divider">
+      <div class="stat-row">
+        <div class="stat-card"><div class="s-label">Base Amount</div><div class="s-value" id="gst-base">₹0</div></div>
+        <div class="stat-card"><div class="s-label" id="gst-tax-label">CGST</div><div class="s-value" id="gst-cgst">₹0</div></div>
+        <div class="stat-card"><div class="s-label" id="gst-tax2-label">SGST</div><div class="s-value" id="gst-sgst">₹0</div></div>
+        <div class="stat-card"><div class="s-label">Total GST</div><div class="s-value" id="gst-total-tax">₹0</div></div>
+      </div>
+      <div class="result-box" style="margin-top:1rem">
+        <div class="result-label">Final Invoice Amount</div>
+        <div class="result-value" id="gst-final">₹0</div>
+        <div class="result-sub" id="gst-words"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ EMI CALCULATOR ═══════════ -->
+<div class="tool-panel" id="panel-emi">
+  <div class="tool-header">
+    <div class="tool-eyebrow">Finance Tool</div>
+    <div class="tool-title">EMI Calculator</div>
+    <div class="tool-desc">Calculate monthly EMI for Home Loan, Car Loan, or Personal Loan with full amortization schedule.</div>
+  </div>
+  <div class="ad-slot">📢 AdSense — 728×90 Banner (High CPC — Loan Ads)</div>
+  <div class="card">
+    <div class="field">
+      <label>Loan Type</label>
+      <div class="toggle-group" style="margin-bottom:0">
+        <button class="toggle-btn active" onclick="setLoanType(this,'home',8.5)">Home Loan</button>
+        <button class="toggle-btn" onclick="setLoanType(this,'car',9.5)">Car Loan</button>
+        <button class="toggle-btn" onclick="setLoanType(this,'personal',12)">Personal</button>
+      </div>
+    </div>
+    <div class="field" style="margin-top:1rem">
+      <label>Loan Amount: ₹<span id="emi-amt-label">10,00,000</span></label>
+      <input type="range" id="emi-amount" min="50000" max="10000000" step="50000" value="1000000" oninput="updateEMILabel();calcEMI()">
+    </div>
+    <div class="field">
+      <label>Interest Rate: <span id="emi-rate-label">8.5</span>% per annum</label>
+      <input type="range" id="emi-rate" min="5" max="24" step="0.1" value="8.5" oninput="updateEMILabel();calcEMI()">
+    </div>
+    <div class="field">
+      <label>Loan Tenure: <span id="emi-tenure-label">20</span> years</label>
+      <input type="range" id="emi-tenure" min="1" max="30" step="1" value="20" oninput="updateEMILabel();calcEMI()">
+    </div>
+    <hr class="divider">
+    <div class="stat-row">
+      <div class="stat-card"><div class="s-label">Monthly EMI</div><div class="s-value" id="emi-monthly" style="color:var(--accent)">₹8,678</div></div>
+      <div class="stat-card"><div class="s-label">Total Interest</div><div class="s-value" id="emi-interest">₹10,82,720</div></div>
+      <div class="stat-card"><div class="s-label">Total Payment</div><div class="s-value" id="emi-total">₹20,82,720</div></div>
+      <div class="stat-card"><div class="s-label">Principal</div><div class="s-value" id="emi-principal">₹10,00,000</div></div>
+    </div>
+    <div style="margin-top:1rem">
+      <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--text-secondary);margin-bottom:4px">
+        <span>Principal</span><span id="emi-p-pct">48%</span>
+      </div>
+      <div class="prog-bar"><div class="prog-bar-fill" id="emi-p-bar" style="width:48%"></div></div>
+      <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--text-secondary);margin:8px 0 4px">
+        <span>Interest</span><span id="emi-i-pct">52%</span>
+      </div>
+      <div class="prog-bar"><div class="prog-bar-fill" id="emi-i-bar" style="width:52%;background:#EF4444"></div></div>
+    </div>
+    <details style="margin-top:1rem">
+      <summary style="font-size:13px;font-weight:500;cursor:pointer;color:var(--accent);padding:4px 0">View Amortization Schedule</summary>
+      <div style="overflow-x:auto;margin-top:0.75rem">
+        <table id="emi-table">
+          <thead><tr><th>Year</th><th>Principal (₹)</th><th>Interest (₹)</th><th>Balance (₹)</th></tr></thead>
+          <tbody id="emi-tbody"></tbody>
+        </table>
+      </div>
+    </details>
+  </div>
+</div>
+
+<!-- ═══════════ INCOME TAX ═══════════ -->
+<div class="tool-panel" id="panel-tax">
+  <div class="tool-header">
+    <div class="tool-eyebrow">Finance Tool</div>
+    <div class="tool-title">Income Tax Calculator</div>
+    <div class="tool-desc">Compare Old vs New Tax Regime for FY 2024-25 (AY 2025-26).</div>
+  </div>
+  <div class="ad-slot">📢 AdSense — 728×90 Banner</div>
+  <div class="card">
+    <div class="grid-2">
+      <div class="field">
+        <label>Annual Income (₹)</label>
+        <input type="number" id="tax-income" placeholder="e.g. 1200000" oninput="calcTax()">
+      </div>
+      <div class="field">
+        <label>Age Group</label>
+        <select id="tax-age" onchange="calcTax()">
+          <option value="general">Below 60 years</option>
+          <option value="senior">60–79 years (Senior)</option>
+          <option value="supersenior">80+ years (Super Senior)</option>
+        </select>
+      </div>
+    </div>
+    <div class="field">
+      <label>Deductions under Old Regime (80C, HRA, etc.) ₹</label>
+      <input type="number" id="tax-deductions" placeholder="e.g. 150000" oninput="calcTax()">
+    </div>
+    <div id="tax-result" style="display:none">
+      <hr class="divider">
+      <div class="grid-2">
+        <div class="result-box">
+          <div class="result-label">Old Regime Tax</div>
+          <div class="result-value" id="tax-old">₹0</div>
+          <div class="result-sub" id="tax-old-eff">Effective rate: 0%</div>
+        </div>
+        <div class="result-box success">
+          <div class="result-label">New Regime Tax</div>
+          <div class="result-value success" id="tax-new">₹0</div>
+          <div class="result-sub" id="tax-new-eff">Effective rate: 0%</div>
+        </div>
+      </div>
+      <div class="result-box" id="tax-verdict" style="margin-top:1rem;text-align:center">
+        <div class="result-label">Recommended Regime</div>
+        <div class="result-value" id="tax-save" style="font-size:20px"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ PDF COMPRESSOR ═══════════ -->
+<div class="tool-panel" id="panel-pdf">
+  <div class="tool-header">
+    <div class="tool-eyebrow">Document Tool</div>
+    <div class="tool-title">PDF Tools</div>
+    <div class="tool-desc">Compress, merge, or split PDF files for government portals, college applications, and more.</div>
+  </div>
+  <div class="ad-slot">📢 AdSense — 728×90 Banner</div>
+  <div class="card">
+    <div class="toggle-group" style="margin-bottom:1.25rem">
+      <button class="toggle-btn active" onclick="setPDFMode(this,'compress')">Compress</button>
+      <button class="toggle-btn" onclick="setPDFMode(this,'merge')">Merge</button>
+      <button class="toggle-btn" onclick="setPDFMode(this,'split')">Split</button>
+    </div>
+    <div class="drop-zone" id="pdf-drop" onclick="document.getElementById('pdf-input').click()" ondragover="e=>{e.preventDefault();this.classList.add('drag-over')}" ondragleave="this.classList.remove('drag-over')">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
+      <p>Click to select PDF or drag & drop here</p>
+      <span>Maximum file size: 50MB</span>
+    </div>
+    <input type="file" id="pdf-input" accept=".pdf" multiple style="display:none" onchange="handlePDFSelect(this)">
+    <div id="pdf-file-list" style="margin-top:1rem"></div>
+    <div id="pdf-compress-opts">
+      <div class="field" style="margin-top:1rem">
+        <label>Compression Level</label>
+        <select id="pdf-quality">
+          <option value="low">High Compression (small file, lower quality)</option>
+          <option value="medium" selected>Balanced (recommended)</option>
+          <option value="high">Low Compression (best quality)</option>
+        </select>
+      </div>
+    </div>
+    <button class="btn" style="margin-top:1rem;width:100%" onclick="processPDF()">
+      <svg width="16" height="16" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      Process & Download PDF
+    </button>
+    <p style="font-size:12px;color:var(--text-tertiary);text-align:center;margin-top:8px">Files processed in browser — never uploaded to any server</p>
+  </div>
+</div>
+
+<!-- ═══════════ RESUME BUILDER ═══════════ -->
+<div class="tool-panel" id="panel-resume">
+  <div class="tool-header">
+    <div class="tool-eyebrow">Document Tool</div>
+    <div class="tool-title">Resume Builder</div>
+    <div class="tool-desc">Create an ATS-friendly resume and download as PDF — no signup needed.</div>
+  </div>
+  <div class="ad-slot">📢 AdSense — 728×90 Banner</div>
+  <div class="grid-2" style="gap:1.25rem;align-items:start">
+    <div class="card" style="padding:1.25rem">
+      <p style="font-size:13px;font-weight:600;margin-bottom:1rem;color:var(--text-secondary)">Personal Info</p>
+      <div class="field"><label>Full Name</label><input type="text" id="r-name" placeholder="Rahul Sharma" oninput="updateResume()"></div>
+      <div class="field"><label>Job Title</label><input type="text" id="r-title" placeholder="Software Engineer" oninput="updateResume()"></div>
+      <div class="field"><label>Email</label><input type="text" id="r-email" placeholder="rahul@email.com" oninput="updateResume()"></div>
+      <div class="field"><label>Phone</label><input type="text" id="r-phone" placeholder="+91 98765 43210" oninput="updateResume()"></div>
+      <div class="field"><label>Location</label><input type="text" id="r-location" placeholder="Mumbai, Maharashtra" oninput="updateResume()"></div>
+      <hr class="divider">
+      <p style="font-size:13px;font-weight:600;margin-bottom:0.75rem;color:var(--text-secondary)">Summary</p>
+      <div class="field"><textarea id="r-summary" rows="3" placeholder="Brief professional summary..." oninput="updateResume()"></textarea></div>
+      <hr class="divider">
+      <p style="font-size:13px;font-weight:600;margin-bottom:0.75rem;color:var(--text-secondary)">Skills (comma separated)</p>
+      <div class="field"><input type="text" id="r-skills" placeholder="JavaScript, React, Node.js, Python" oninput="updateResume()"></div>
+      <hr class="divider">
+      <p style="font-size:13px;font-weight:600;margin-bottom:0.75rem;color:var(--text-secondary)">Education</p>
+      <div class="field"><input type="text" id="r-edu-degree" placeholder="B.E. Computer Engineering" oninput="updateResume()"></div>
+      <div class="field"><input type="text" id="r-edu-college" placeholder="GTU — 2020–2024, CGPA: 8.2" oninput="updateResume()"></div>
+      <hr class="divider">
+      <p style="font-size:13px;font-weight:600;margin-bottom:0.75rem;color:var(--text-secondary)">Work Experience</p>
+      <div class="field"><input type="text" id="r-exp-title" placeholder="Job Title — Company Name" oninput="updateResume()"></div>
+      <div class="field"><input type="text" id="r-exp-period" placeholder="Jun 2024 — Present" oninput="updateResume()"></div>
+      <div class="field"><textarea id="r-exp-desc" rows="3" placeholder="Key responsibilities and achievements..." oninput="updateResume()"></textarea></div>
+      <button class="btn" style="width:100%;margin-top:0.5rem" onclick="printResume()">Download Resume (PDF)</button>
+    </div>
+    <div>
+      <p style="font-size:12px;font-weight:600;color:var(--text-tertiary);text-transform:uppercase;letter-spacing:0.07em;margin-bottom:8px">Live Preview</p>
+      <div class="resume-preview" id="resume-preview">
+        <h2 id="rv-name">Your Name</h2>
+        <p class="contact-line" id="rv-contact">your@email.com · +91 00000 00000 · City, State</p>
+        <p id="rv-title-line" style="font-size:12.5px;font-weight:500;color:var(--accent);margin-top:2px"></p>
+        <h3>Summary</h3>
+        <p id="rv-summary">Your professional summary will appear here.</p>
+        <h3>Skills</h3>
+        <div id="rv-skills"></div>
+        <h3>Education</h3>
+        <p id="rv-edu-degree" style="font-weight:600;font-size:13px"></p>
+        <p id="rv-edu-college"></p>
+        <h3>Work Experience</h3>
+        <p id="rv-exp-title" style="font-weight:600;font-size:13px"></p>
+        <p id="rv-exp-period" style="color:var(--text-tertiary);font-size:11px"></p>
+        <p id="rv-exp-desc"></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ INVOICE GENERATOR ═══════════ -->
+<div class="tool-panel" id="panel-invoice">
+  <div class="tool-header">
+    <div class="tool-eyebrow">Business Tool</div>
+    <div class="tool-title">GST Invoice Generator</div>
+    <div class="tool-desc">Generate professional GST invoices for freelancers and small businesses — free, no signup.</div>
+  </div>
+  <div class="ad-slot">📢 AdSense — 728×90 Banner</div>
+  <div class="card">
+    <div class="grid-2">
+      <div>
+        <p style="font-size:13px;font-weight:600;margin-bottom:0.75rem;color:var(--text-secondary)">From (Your Details)</p>
+        <div class="field"><label>Business Name</label><input type="text" id="inv-from-name" placeholder="Your Business Name"></div>
+        <div class="field"><label>GSTIN</label><input type="text" id="inv-from-gst" placeholder="22AAAAA0000A1Z5"></div>
+        <div class="field"><label>Address</label><input type="text" id="inv-from-addr" placeholder="City, State, PIN"></div>
+      </div>
+      <div>
+        <p style="font-size:13px;font-weight:600;margin-bottom:0.75rem;color:var(--text-secondary)">To (Client Details)</p>
+        <div class="field"><label>Client Name</label><input type="text" id="inv-to-name" placeholder="Client Company Name"></div>
+        <div class="field"><label>Client GSTIN (optional)</label><input type="text" id="inv-to-gst" placeholder="Optional"></div>
+        <div class="field"><label>Client Address</label><input type="text" id="inv-to-addr" placeholder="City, State, PIN"></div>
+      </div>
+    </div>
+    <hr class="divider">
+    <div class="grid-2">
+      <div class="field"><label>Invoice Number</label><input type="text" id="inv-num" value="INV-001"></div>
+      <div class="field"><label>Invoice Date</label><input type="date" id="inv-date"></div>
+    </div>
+    <p style="font-size:13px;font-weight:600;margin:0.5rem 0 0.75rem;color:var(--text-secondary)">Items / Services</p>
+    <div id="inv-items">
+      <div class="inv-item-row grid-2" style="gap:8px;margin-bottom:8px">
+        <input type="text" placeholder="Description" class="inv-desc">
+        <input type="number" placeholder="Amount ₹" class="inv-amt" oninput="calcInvoice()">
+      </div>
+    </div>
+    <button class="btn btn-outline btn-sm" onclick="addInvoiceRow()" style="margin-bottom:1rem">+ Add Item</button>
+    <div class="field">
+      <label>GST Rate</label>
+      <select id="inv-gst-rate" onchange="calcInvoice()">
+        <option value="18" selected>18%</option><option value="12">12%</option><option value="5">5%</option><option value="28">28%</option><option value="0">0%</option>
+      </select>
+    </div>
+    <div id="inv-summary" style="background:var(--bg);border-radius:var(--radius);padding:1rem;margin-top:0.75rem">
+      <div style="display:flex;justify-content:space-between;font-size:13px;padding:4px 0;border-bottom:1px solid var(--border)"><span>Subtotal</span><span id="inv-subtotal">₹0</span></div>
+      <div style="display:flex;justify-content:space-between;font-size:13px;padding:4px 0;border-bottom:1px solid var(--border)"><span>CGST</span><span id="inv-cgst">₹0</span></div>
+      <div style="display:flex;justify-content:space-between;font-size:13px;padding:4px 0;border-bottom:1px solid var(--border)"><span>SGST</span><span id="inv-sgst">₹0</span></div>
+      <div style="display:flex;justify-content:space-between;font-size:15px;font-weight:700;padding:8px 0"><span>Total</span><span id="inv-total" style="color:var(--accent)">₹0</span></div>
+    </div>
+    <button class="btn" style="width:100%;margin-top:1rem" onclick="downloadInvoice()">Download Invoice (PDF)</button>
+  </div>
+</div>
+
+<!-- ═══════════ AGE CALCULATOR ═══════════ -->
+<div class="tool-panel" id="panel-age">
+  <div class="tool-header">
+    <div class="tool-eyebrow">Utility Tool</div>
+    <div class="tool-title">Age Calculator</div>
+    <div class="tool-desc">Calculate exact age in years, months, and days — useful for Passport, Aadhar, government forms.</div>
+  </div>
+  <div class="ad-slot">📢 AdSense — 336×280 Rectangle</div>
+  <div class="card">
+    <div class="grid-2">
+      <div class="field">
+        <label>Date of Birth</label>
+        <input type="date" id="age-dob" onchange="calcAge()">
+      </div>
+      <div class="field">
+        <label>Calculate Age On</label>
+        <input type="date" id="age-target" onchange="calcAge()">
+      </div>
+    </div>
+    <div id="age-result" style="display:none">
+      <hr class="divider">
+      <div class="stat-row">
+        <div class="stat-card" style="text-align:center"><div class="s-label">Years</div><div class="s-value" id="age-years" style="font-size:32px;color:var(--accent)">0</div></div>
+        <div class="stat-card" style="text-align:center"><div class="s-label">Months</div><div class="s-value" id="age-months" style="font-size:32px">0</div></div>
+        <div class="stat-card" style="text-align:center"><div class="s-label">Days</div><div class="s-value" id="age-days" style="font-size:32px">0</div></div>
+      </div>
+      <div class="result-box" style="margin-top:1rem">
+        <div class="result-label">Exact Age</div>
+        <div class="result-value" id="age-full" style="font-size:18px"></div>
+        <div class="result-sub" id="age-next">Next birthday in — days</div>
+      </div>
+      <div class="stat-row" style="margin-top:0.75rem">
+        <div class="stat-card"><div class="s-label">Total Days Lived</div><div class="s-value" id="age-total-days"></div></div>
+        <div class="stat-card"><div class="s-label">Total Weeks</div><div class="s-value" id="age-total-weeks"></div></div>
+        <div class="stat-card"><div class="s-label">Total Hours (approx)</div><div class="s-value" id="age-total-hours"></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ CGPA CONVERTER ═══════════ -->
+<div class="tool-panel" id="panel-cgpa">
+  <div class="tool-header">
+    <div class="tool-eyebrow">Education Tool</div>
+    <div class="tool-title">CGPA to Percentage Converter</div>
+    <div class="tool-desc">Convert CGPA to percentage for GTU, VTU, Mumbai University, Anna University, and more.</div>
+  </div>
+  <div class="ad-slot">📢 AdSense — 336×280 Rectangle</div>
+  <div class="card">
+    <div class="field">
+      <label>Select University / Formula</label>
+      <select id="cgpa-uni" onchange="calcCGPA()">
+        <option value="gtu">GTU (Gujarat Technological University) — ×10</option>
+        <option value="vtu">VTU (Visvesvaraya) — ×10 − 7.5</option>
+        <option value="mumbai">Mumbai University — ×7.1 + 11</option>
+        <option value="anna">Anna University — ×10</option>
+        <option value="ggsipu">GGSIPU — ×9.5</option>
+        <option value="ptu">PTU — ×10</option>
+        <option value="gen">Generic (×10)</option>
+      </select>
+    </div>
+    <div class="field">
+      <label>Your CGPA</label>
+      <input type="number" id="cgpa-val" placeholder="e.g. 8.24" min="0" max="10" step="0.01" oninput="calcCGPA()">
+    </div>
+    <div id="cgpa-result" style="display:none">
+      <div class="result-box" style="margin-top:1rem;text-align:center">
+        <div class="result-label">Equivalent Percentage</div>
+        <div class="result-value" id="cgpa-pct" style="font-size:40px"></div>
+        <div class="result-sub" id="cgpa-formula"></div>
+      </div>
+      <div class="stat-row" style="margin-top:0.75rem">
+        <div class="stat-card"><div class="s-label">Grade</div><div class="s-value" id="cgpa-grade"></div></div>
+        <div class="stat-card"><div class="s-label">Classification</div><div class="s-value" id="cgpa-class" style="font-size:14px"></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ IMAGE COMPRESSOR ═══════════ -->
+<div class="tool-panel" id="panel-img">
+  <div class="tool-header">
+    <div class="tool-eyebrow">Utility Tool</div>
+    <div class="tool-title">Image Compressor</div>
+    <div class="tool-desc">Compress images for government portals (50KB limit), college forms, and job applications — no upload.</div>
+  </div>
+  <div class="ad-slot">📢 AdSense — 728×90 Banner</div>
+  <div class="card">
+    <div class="drop-zone" onclick="document.getElementById('img-input').click()">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+      <p>Click to select image (JPG, PNG, WEBP)</p>
+      <span>Processed entirely in your browser</span>
+    </div>
+    <input type="file" id="img-input" accept="image/*" style="display:none" onchange="handleImage(this)">
+    <div id="img-controls" style="display:none;margin-top:1rem">
+      <div class="field">
+        <label>Quality: <span id="img-quality-label">80</span>%</label>
+        <input type="range" id="img-quality" min="10" max="100" value="80" oninput="compressImage()">
+      </div>
+      <div class="field">
+        <label>Target Size (KB) — optional</label>
+        <input type="number" id="img-target-kb" placeholder="e.g. 50 for govt portals" oninput="compressImage()">
+      </div>
+      <div class="grid-2" style="gap:1rem;margin-top:0.75rem">
+        <div>
+          <p style="font-size:12px;color:var(--text-tertiary);margin-bottom:4px">Original</p>
+          <canvas id="img-original" style="width:100%;border-radius:8px;border:1px solid var(--border)"></canvas>
+          <p style="font-size:12px;color:var(--text-secondary);margin-top:4px" id="img-orig-size"></p>
+        </div>
+        <div>
+          <p style="font-size:12px;color:var(--text-tertiary);margin-bottom:4px">Compressed</p>
+          <canvas id="img-compressed" style="width:100%;border-radius:8px;border:1px solid var(--border)"></canvas>
+          <p style="font-size:12px;color:var(--success);margin-top:4px" id="img-new-size"></p>
+        </div>
+      </div>
+      <button class="btn" style="width:100%;margin-top:1rem" id="img-download-btn" onclick="downloadImage()">Download Compressed Image</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ HINDI TYPING ═══════════ -->
+<div class="tool-panel" id="panel-hindi">
+  <div class="tool-header">
+    <div class="tool-eyebrow">Language Tool</div>
+    <div class="tool-title">Hindi Typing Tool</div>
+    <div class="tool-desc">Type in Hinglish (Roman English) and get proper Hindi Devanagari. Perfect for letters, applications.</div>
+  </div>
+  <div class="ad-slot">📢 AdSense — 336×280 Rectangle</div>
+  <div class="card">
+    <div class="grid-2" style="gap:1rem">
+      <div class="field" style="margin-bottom:0">
+        <label>Type in Hinglish (English letters)</label>
+        <textarea id="hindi-input" rows="8" placeholder="namaskar mera naam rahul hai&#10;main surat mein rehta hoon&#10;mujhe kaam chahiye..." oninput="convertHindi()" style="resize:vertical"></textarea>
+      </div>
+      <div class="field" style="margin-bottom:0">
+        <label>Hindi Output (Devanagari)</label>
+        <textarea id="hindi-output" rows="8" placeholder="यहाँ हिंदी में दिखेगा..." readonly style="resize:vertical;font-size:16px;line-height:1.8;background:var(--accent-light)"></textarea>
+      </div>
+    </div>
+    <div style="display:flex;gap:8px;margin-top:0.75rem;flex-wrap:wrap">
+      <button class="btn btn-sm" onclick="copyHindi()">Copy Hindi Text</button>
+      <button class="btn btn-outline btn-sm" onclick="document.getElementById('hindi-input').value='';document.getElementById('hindi-output').value=''">Clear</button>
+    </div>
+    <div style="margin-top:1rem;background:var(--bg);border-radius:var(--radius);padding:0.875rem">
+      <p style="font-size:12px;font-weight:600;color:var(--text-secondary);margin-bottom:6px">Quick Reference</p>
+      <div style="display:flex;flex-wrap:wrap;gap:4px;font-size:12px">
+        <span class="tag">namaskar → नमस्कार</span>
+        <span class="tag">dhanyavaad → धन्यवाद</span>
+        <span class="tag">aap → आप</span>
+        <span class="tag">main → मैं</span>
+        <span class="tag">hai → है</span>
+        <span class="tag">hoon → हूँ</span>
+        <span class="tag">chahiye → चाहिए</span>
+        <span class="tag">kaam → काम</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<script>
+// ── Sidebar & Nav ──
+function toggleSidebar() {
+  document.getElementById('sidebar').classList.toggle('open');
+}
+function showTool(id) {
+  document.querySelectorAll('.tool-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  document.getElementById('panel-' + id).classList.add('active');
+  const navEl = document.getElementById('nav-' + id);
+  if (navEl) navEl.classList.add('active');
+  if (window.innerWidth <= 768) document.getElementById('sidebar').classList.remove('open');
+  window.scrollTo(0, 0);
+}
+
+// ── Helpers ──
+function fmt(n) { return '₹' + Math.round(n).toLocaleString('en-IN'); }
+function fmtN(n) { return Math.round(n).toLocaleString('en-IN'); }
+
+// ── GST CALCULATOR ──
+let gstMode = 'add';
+function setGSTMode(m) {
+  gstMode = m;
+  document.getElementById('gst-add-btn').classList.toggle('active', m === 'add');
+  document.getElementById('gst-rem-btn').classList.toggle('active', m === 'remove');
+  calcGST();
+}
+function calcGST() {
+  const amt = parseFloat(document.getElementById('gst-amount').value);
+  const rate = parseFloat(document.getElementById('gst-rate').value);
+  const type = document.getElementById('gst-type').value;
+  if (!amt || isNaN(amt)) { document.getElementById('gst-result').style.display = 'none'; return; }
+  let base, gstAmt, final;
+  if (gstMode === 'add') { base = amt; gstAmt = amt * rate / 100; final = amt + gstAmt; }
+  else { final = amt; base = amt * 100 / (100 + rate); gstAmt = amt - base; }
+  document.getElementById('gst-result').style.display = 'block';
+  document.getElementById('gst-base').textContent = fmt(base);
+  document.getElementById('gst-final').textContent = fmt(final);
+  if (type === 'intra') {
+    document.getElementById('gst-tax-label').textContent = 'CGST (' + rate/2 + '%)';
+    document.getElementById('gst-tax2-label').textContent = 'SGST (' + rate/2 + '%)';
+    document.getElementById('gst-cgst').textContent = fmt(gstAmt/2);
+    document.getElementById('gst-sgst').textContent = fmt(gstAmt/2);
+  } else {
+    document.getElementById('gst-tax-label').textContent = 'IGST (' + rate + '%)';
+    document.getElementById('gst-tax2-label').textContent = '—';
+    document.getElementById('gst-cgst').textContent = fmt(gstAmt);
+    document.getElementById('gst-sgst').textContent = '—';
+  }
+  document.getElementById('gst-total-tax').textContent = fmt(gstAmt);
+  document.getElementById('gst-words').textContent = 'GST @ ' + rate + '% | Base: ' + fmt(base) + ' | Tax: ' + fmt(gstAmt);
+}
+
+// ── EMI CALCULATOR ──
+function setLoanType(el, type, rate) {
+  document.querySelectorAll('#panel-emi .toggle-btn').forEach(b => b.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('emi-rate').value = rate;
+  updateEMILabel(); calcEMI();
+}
+function updateEMILabel() {
+  const amt = parseInt(document.getElementById('emi-amount').value);
+  const rate = parseFloat(document.getElementById('emi-rate').value);
+  const tenure = parseInt(document.getElementById('emi-tenure').value);
+  document.getElementById('emi-amt-label').textContent = amt.toLocaleString('en-IN');
+  document.getElementById('emi-rate-label').textContent = rate.toFixed(1);
+  document.getElementById('emi-tenure-label').textContent = tenure;
+}
+function calcEMI() {
+  const P = parseInt(document.getElementById('emi-amount').value);
+  const annualRate = parseFloat(document.getElementById('emi-rate').value);
+  const years = parseInt(document.getElementById('emi-tenure').value);
+  const r = annualRate / 12 / 100;
+  const n = years * 12;
+  const emi = r === 0 ? P/n : P * r * Math.pow(1+r,n) / (Math.pow(1+r,n)-1);
+  const totalPay = emi * n;
+  const totalInt = totalPay - P;
+  document.getElementById('emi-monthly').textContent = fmt(emi);
+  document.getElementById('emi-interest').textContent = fmt(totalInt);
+  document.getElementById('emi-total').textContent = fmt(totalPay);
+  document.getElementById('emi-principal').textContent = fmt(P);
+  const pPct = Math.round(P / totalPay * 100);
+  const iPct = 100 - pPct;
+  document.getElementById('emi-p-pct').textContent = pPct + '%';
+  document.getElementById('emi-i-pct').textContent = iPct + '%';
+  document.getElementById('emi-p-bar').style.width = pPct + '%';
+  document.getElementById('emi-i-bar').style.width = iPct + '%';
+  // amortization
+  let balance = P, tbody = '', yr = 1;
+  while (yr <= Math.min(years, 30)) {
+    let yPrincipal = 0, yInterest = 0;
+    for (let m = 0; m < 12 && balance > 0; m++) {
+      const intPay = balance * r;
+      const prinPay = Math.min(emi - intPay, balance);
+      yInterest += intPay; yPrincipal += prinPay; balance -= prinPay;
+    }
+    tbody += `<tr><td>${yr}</td><td>${fmtN(yPrincipal)}</td><td>${fmtN(yInterest)}</td><td>${fmtN(Math.max(0,balance))}</td></tr>`;
+    yr++;
+  }
+  document.getElementById('emi-tbody').innerHTML = tbody;
+}
+
+// ── INCOME TAX ──
+function calcTax() {
+  const income = parseFloat(document.getElementById('tax-income').value);
+  const deductions = parseFloat(document.getElementById('tax-deductions').value) || 0;
+  if (!income) { document.getElementById('tax-result').style.display = 'none'; return; }
+  const age = document.getElementById('tax-age').value;
+
+  function slabTax(taxable, slabs) {
+    let tax = 0;
+    for (const [limit, rate] of slabs) {
+      if (taxable <= 0) break;
+      const chunk = limit === Infinity ? taxable : Math.min(taxable, limit);
+      tax += chunk * rate / 100;
+      taxable -= chunk;
+    }
+    return tax;
+  }
+
+  // Old regime slabs (FY 2024-25)
+  const standardDeduction = 50000;
+  const oldTaxable = Math.max(0, income - standardDeduction - deductions);
+  let oldSlabs;
+  if (age === 'supersenior') oldSlabs = [[500000,0],[500000,20],[Infinity,30]];
+  else if (age === 'senior') oldSlabs = [[300000,0],[200000,5],[300000,20],[Infinity,30]];
+  else oldSlabs = [[250000,0],[250000,5],[500000,20],[Infinity,30]];
+  let oldTax = slabTax(oldTaxable, oldSlabs);
+  if (oldTaxable <= 500000) oldTax = 0; // 87A rebate
+  oldTax += oldTax * 0.04; // 4% cess
+
+  // New regime slabs (FY 2024-25)
+  const newTaxable = Math.max(0, income - 75000); // standard deduction
+  const newSlabs = [[300000,0],[400000,5],[300000,10],[300000,15],[300000,20],[Infinity,30]];
+  let newTax = slabTax(newTaxable, newSlabs);
+  if (newTaxable <= 700000) newTax = 0; // 87A rebate
+  newTax += newTax * 0.04;
+
+  document.getElementById('tax-result').style.display = 'block';
+  document.getElementById('tax-old').textContent = fmt(oldTax);
+  document.getElementById('tax-new').textContent = fmt(newTax);
+  document.getElementById('tax-old-eff').textContent = 'Effective rate: ' + (income > 0 ? (oldTax/income*100).toFixed(1) : 0) + '%';
+  document.getElementById('tax-new-eff').textContent = 'Effective rate: ' + (income > 0 ? (newTax/income*100).toFixed(1) : 0) + '%';
+
+  const saving = Math.abs(oldTax - newTax);
+  const verdictEl = document.getElementById('tax-verdict');
+  if (newTax < oldTax) {
+    document.getElementById('tax-save').textContent = 'New Regime saves you ' + fmt(saving);
+    verdictEl.className = 'result-box success';
+  } else if (oldTax < newTax) {
+    document.getElementById('tax-save').textContent = 'Old Regime saves you ' + fmt(saving);
+    verdictEl.className = 'result-box';
+  } else {
+    document.getElementById('tax-save').textContent = 'Both regimes are equal';
+    verdictEl.className = 'result-box';
+  }
+}
+
+// ── PDF ──
+let pdfMode = 'compress', pdfFiles = [];
+function setPDFMode(el, mode) {
+  pdfMode = mode;
+  document.querySelectorAll('#panel-pdf .toggle-btn').forEach(b => b.classList.remove('active'));
+  el.classList.add('active');
+}
+function handlePDFSelect(inp) {
+  pdfFiles = Array.from(inp.files);
+  const list = document.getElementById('pdf-file-list');
+  list.innerHTML = pdfFiles.map((f,i) => `<div class="file-item">📄 ${f.name}<span class="file-size">${(f.size/1024).toFixed(1)} KB</span><button class="file-remove" onclick="removePDF(${i})">×</button></div>`).join('');
+}
+function removePDF(i) { pdfFiles.splice(i,1); document.getElementById('pdf-file-list').innerHTML = pdfFiles.map((f,j) => `<div class="file-item">📄 ${f.name}<span class="file-size">${(f.size/1024).toFixed(1)} KB</span><button class="file-remove" onclick="removePDF(${j})">×</button></div>`).join(''); }
+function processPDF() {
+  if (!pdfFiles.length) { alert('Please select a PDF file first.'); return; }
+  alert('PDF processing requires a server-side library (pdf-lib). For full implementation, upload this website to a server and add pdf-lib.js. This demo shows the UI flow.');
+}
+
+// ── RESUME ──
+function updateResume() {
+  const g = id => document.getElementById(id).value;
+  document.getElementById('rv-name').textContent = g('r-name') || 'Your Name';
+  document.getElementById('rv-contact').textContent = [g('r-email'),g('r-phone'),g('r-location')].filter(Boolean).join(' · ') || 'your@email.com · +91 00000 00000 · City';
+  document.getElementById('rv-title-line').textContent = g('r-title');
+  document.getElementById('rv-summary').textContent = g('r-summary') || 'Your professional summary will appear here.';
+  const skills = g('r-skills').split(',').map(s=>s.trim()).filter(Boolean);
+  document.getElementById('rv-skills').innerHTML = skills.map(s=>`<span class="tag">${s}</span>`).join('');
+  document.getElementById('rv-edu-degree').textContent = g('r-edu-degree');
+  document.getElementById('rv-edu-college').textContent = g('r-edu-college');
+  document.getElementById('rv-exp-title').textContent = g('r-exp-title');
+  document.getElementById('rv-exp-period').textContent = g('r-exp-period');
+  document.getElementById('rv-exp-desc').textContent = g('r-exp-desc');
+}
+function printResume() {
+  const w = window.open('','_blank');
+  w.document.write('<html><head><title>Resume</title><style>body{font-family:Arial,sans-serif;max-width:700px;margin:2rem auto;font-size:13px;line-height:1.6}h2{font-size:22px}h3{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:#3B6EF6;border-bottom:1px solid #eee;padding-bottom:4px;margin:14px 0 8px}.tag{display:inline-block;border:1px solid #ddd;border-radius:10px;padding:1px 8px;margin:2px;font-size:11px}@media print{@page{margin:1cm}}</style></head><body>');
+  w.document.write(document.getElementById('resume-preview').innerHTML);
+  w.document.write('</body></html>');
+  w.document.close();
+  w.print();
+}
+
+// ── INVOICE ──
+function addInvoiceRow() {
+  const div = document.createElement('div');
+  div.className = 'inv-item-row grid-2';
+  div.style.cssText = 'gap:8px;margin-bottom:8px';
+  div.innerHTML = '<input type="text" placeholder="Description" class="inv-desc"><input type="number" placeholder="Amount ₹" class="inv-amt" oninput="calcInvoice()">';
+  document.getElementById('inv-items').appendChild(div);
+}
+function calcInvoice() {
+  const amts = Array.from(document.querySelectorAll('.inv-amt')).map(i=>parseFloat(i.value)||0);
+  const sub = amts.reduce((a,b)=>a+b,0);
+  const rate = parseFloat(document.getElementById('inv-gst-rate').value);
+  const gst = sub * rate / 100;
+  document.getElementById('inv-subtotal').textContent = fmt(sub);
+  document.getElementById('inv-cgst').textContent = fmt(gst/2);
+  document.getElementById('inv-sgst').textContent = fmt(gst/2);
+  document.getElementById('inv-total').textContent = fmt(sub+gst);
+}
+function downloadInvoice() {
+  const g = id => document.getElementById(id).value;
+  const amts = Array.from(document.querySelectorAll('.inv-amt')).map(i=>parseFloat(i.value)||0);
+  const descs = Array.from(document.querySelectorAll('.inv-desc')).map(i=>i.value);
+  const sub = amts.reduce((a,b)=>a+b,0);
+  const rate = parseFloat(document.getElementById('inv-gst-rate').value);
+  const gst = sub * rate / 100;
+  const rows = amts.map((a,i)=>`<tr><td>${descs[i]||'—'}</td><td style="text-align:right">₹${a.toLocaleString('en-IN')}</td></tr>`).join('');
+  const w = window.open('','_blank');
+  w.document.write(`<html><head><title>Invoice ${g('inv-num')}</title><style>body{font-family:Arial,sans-serif;max-width:700px;margin:2rem auto;font-size:13px}h1{font-size:28px;color:#3B6EF6}table{width:100%;border-collapse:collapse;margin:1rem 0}th,td{padding:8px;border-bottom:1px solid #eee}th{background:#f8f9fc;text-align:left}.total{font-size:15px;font-weight:700}.grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin:1.5rem 0}@media print{@page{margin:1.5cm}}</style></head><body><h1>TAX INVOICE</h1><div class="grid"><div><b>${g('inv-from-name')||'Your Business'}</b><br>GSTIN: ${g('inv-from-gst')||'—'}<br>${g('inv-from-addr')||'—'}</div><div style="text-align:right">Invoice #: ${g('inv-num')}<br>Date: ${g('inv-date')||new Date().toLocaleDateString('en-IN')}<br><br><b>Bill To:</b><br>${g('inv-to-name')||'—'}<br>${g('inv-to-addr')||'—'}</div></div><table><thead><tr><th>Description</th><th style="text-align:right">Amount</th></tr></thead><tbody>${rows}<tr><td>Subtotal</td><td style="text-align:right">₹${sub.toLocaleString('en-IN')}</td></tr><tr><td>CGST (${rate/2}%)</td><td style="text-align:right">₹${(gst/2).toLocaleString('en-IN')}</td></tr><tr><td>SGST (${rate/2}%)</td><td style="text-align:right">₹${(gst/2).toLocaleString('en-IN')}</td></tr><tr class="total"><td>Total</td><td style="text-align:right;color:#3B6EF6">₹${(sub+gst).toLocaleString('en-IN')}</td></tr></tbody></table></body></html>`);
+  w.document.close(); w.print();
+}
+
+// ── AGE CALCULATOR ──
+document.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('age-target').value = new Date().toISOString().split('T')[0];
+  document.getElementById('inv-date').value = new Date().toISOString().split('T')[0];
+  calcEMI();
+});
+function calcAge() {
+  const dob = new Date(document.getElementById('age-dob').value);
+  const target = new Date(document.getElementById('age-target').value);
+  if (!document.getElementById('age-dob').value) return;
+  let years = target.getFullYear() - dob.getFullYear();
+  let months = target.getMonth() - dob.getMonth();
+  let days = target.getDate() - dob.getDate();
+  if (days < 0) { months--; const prevMonth = new Date(target.getFullYear(), target.getMonth(), 0); days += prevMonth.getDate(); }
+  if (months < 0) { years--; months += 12; }
+  const totalDays = Math.floor((target - dob) / 86400000);
+  document.getElementById('age-result').style.display = 'block';
+  document.getElementById('age-years').textContent = years;
+  document.getElementById('age-months').textContent = months;
+  document.getElementById('age-days').textContent = days;
+  document.getElementById('age-full').textContent = `${years} Years, ${months} Months, ${days} Days`;
+  document.getElementById('age-total-days').textContent = fmtN(totalDays);
+  document.getElementById('age-total-weeks').textContent = fmtN(Math.floor(totalDays/7));
+  document.getElementById('age-total-hours').textContent = fmtN(totalDays*24);
+  const nextBday = new Date(target.getFullYear(), dob.getMonth(), dob.getDate());
+  if (nextBday <= target) nextBday.setFullYear(nextBday.getFullYear()+1);
+  const daysToNext = Math.ceil((nextBday - target) / 86400000);
+  document.getElementById('age-next').textContent = `Next birthday in ${daysToNext} days`;
+}
+
+// ── CGPA ──
+function calcCGPA() {
+  const cgpa = parseFloat(document.getElementById('cgpa-val').value);
+  const uni = document.getElementById('cgpa-uni').value;
+  if (!cgpa || cgpa < 0 || cgpa > 10) { document.getElementById('cgpa-result').style.display = 'none'; return; }
+  const formulas = { gtu: [v=>v*10,'Percentage = CGPA × 10'], vtu: [v=>v*10-7.5,'Percentage = CGPA × 10 − 7.5'], mumbai: [v=>v*7.1+11,'Percentage = CGPA × 7.1 + 11'], anna: [v=>v*10,'Percentage = CGPA × 10'], ggsipu: [v=>v*9.5,'Percentage = CGPA × 9.5'], ptu: [v=>v*10,'Percentage = CGPA × 10'], gen: [v=>v*10,'Percentage = CGPA × 10'] };
+  const [fn, formula] = formulas[uni];
+  const pct = fn(cgpa);
+  document.getElementById('cgpa-result').style.display = 'block';
+  document.getElementById('cgpa-pct').textContent = pct.toFixed(2) + '%';
+  document.getElementById('cgpa-formula').textContent = formula;
+  const grade = cgpa >= 9 ? 'O' : cgpa >= 8 ? 'A+' : cgpa >= 7 ? 'A' : cgpa >= 6 ? 'B+' : cgpa >= 5 ? 'B' : 'C';
+  const cls = pct >= 75 ? 'First Class with Distinction' : pct >= 60 ? 'First Class' : pct >= 50 ? 'Second Class' : 'Pass Class';
+  document.getElementById('cgpa-grade').textContent = grade;
+  document.getElementById('cgpa-class').textContent = cls;
+}
+
+// ── IMAGE COMPRESSOR ──
+let originalFile, imgOriginalData;
+function handleImage(inp) {
+  if (!inp.files[0]) return;
+  originalFile = inp.files[0];
+  const reader = new FileReader();
+  reader.onload = e => {
+    imgOriginalData = e.target.result;
+    const img = new Image();
+    img.onload = () => {
+      const c = document.getElementById('img-original');
+      c.width = img.width; c.height = img.height;
+      c.getContext('2d').drawImage(img,0,0);
+      document.getElementById('img-orig-size').textContent = 'Original: ' + (originalFile.size/1024).toFixed(1) + ' KB';
+      document.getElementById('img-controls').style.display = 'block';
+      compressImage();
+    };
+    img.src = e.target.result;
+  };
+  reader.readAsDataURL(originalFile);
+}
+function compressImage() {
+  if (!imgOriginalData) return;
+  const quality = parseInt(document.getElementById('img-quality').value) / 100;
+  document.getElementById('img-quality-label').textContent = Math.round(quality*100);
+  const img = new Image();
+  img.onload = () => {
+    const c = document.getElementById('img-compressed');
+    c.width = img.width; c.height = img.height;
+    c.getContext('2d').drawImage(img,0,0);
+    const dataUrl = c.toDataURL('image/jpeg', quality);
+    const bytes = Math.round((dataUrl.length - 'data:image/jpeg;base64,'.length) * 3/4);
+    document.getElementById('img-new-size').textContent = 'Compressed: ' + (bytes/1024).toFixed(1) + ' KB (' + Math.round(bytes/originalFile.size*100) + '% of original)';
+  };
+  img.src = imgOriginalData;
+}
+function downloadImage() {
+  const quality = parseInt(document.getElementById('img-quality').value) / 100;
+  const c = document.getElementById('img-compressed');
+  const link = document.createElement('a');
+  link.download = 'compressed_' + (originalFile ? originalFile.name.replace(/\.[^.]+$/,'.jpg') : 'image.jpg');
+  link.href = c.toDataURL('image/jpeg', quality);
+  link.click();
+}
+
+// ── HINDI TYPING ──
+const hindiMap = {
+  'namaskar':'नमस्कार','dhanyavaad':'धन्यवाद','dhanyawad':'धन्यवाद','shukriya':'शुक्रिया',
+  'main':'मैं','mein':'में','mai':'मैं','mujhe':'मुझे','mujko':'मुझको','hamein':'हमें','hum':'हम',
+  'aap':'आप','tum':'तुम','tu':'तू','woh':'वह','wo':'वो','yeh':'यह','ye':'ये','jo':'जो',
+  'hai':'है','hain':'हैं','tha':'था','the':'थे','thi':'थी','hoga':'होगा','hogi':'होगी','hoge':'होंगे',
+  'hoon':'हूँ','hun':'हूँ','ho':'हो','karo':'करो','karna':'करना','karta':'करता','karti':'करती',
+  'kaam':'काम','kab':'कब','kahan':'कहाँ','kyun':'क्यों','kyunki':'क्योंकि','kya':'क्या',
+  'kaise':'कैसे','kaisa':'कैसा','kitna':'कितना','kitne':'कितने',
+  'rehna':'रहना','rehta':'रहता','rehti':'रहती','rehte':'रहते','rahu':'रहूँ',
+  'chahiye':'चाहिए','chahta':'चाहता','chahti':'चाहती',
+  'achha':'अच्छा','accha':'अच्छा','acha':'अच्छा','bura':'बुरा','sahi':'सही','galat':'गलत',
+  'bahut':'बहुत','thoda':'थोड़ा','zyada':'ज़्यादा','kam':'कम','bilkul':'बिल्कुल',
+  'nahi':'नहीं','na':'ना','haan':'हाँ','han':'हाँ','ji':'जी',
+  'ghar':'घर','desh':'देश','india':'भारत','hindi':'हिंदी','bharat':'भारत',
+  'paisa':'पैसा','kaam':'काम','naukri':'नौकरी','school':'स्कूल','padhai':'पढ़ाई',
+  'pita':'पिता','mata':'माता','bhai':'भाई','behen':'बहन','dost':'दोस्त','naam':'नाम',
+  'surat':'सूरत','mumbai':'मुंबई','delhi':'दिल्ली','gujarat':'गुजरात',
+  'aaj':'आज','kal':'कल','abhi':'अभी','jaldi':'जल्दी','baad':'बाद','pehle':'पहले',
+  'please':'कृपया','kripa':'कृपया','maaf':'माफ़','sorry':'माफ़ करें',
+  'likho':'लिखो','likhna':'लिखना','padhna':'पढ़ना','sunna':'सुनना','dekhna':'देखना',
+  'anna':'आना','jana':'जाना','milna':'मिलना','batana':'बताना','samajhna':'समझना',
+  'mera':'मेरा','meri':'मेरी','mere':'मेरे','aapka':'आपका','apna':'अपना',
+  'ek':'एक','do':'दो','teen':'तीन','char':'चार','paanch':'पाँच','das':'दस','sau':'सौ',
+  'sabse':'सबसे','sab':'सब','kuch':'कुछ','bahut':'बहुत'
+};
+function convertHindi() {
+  const text = document.getElementById('hindi-input').value;
+  const words = text.split(/(\s+|[,।.!?\n])/);
+  const converted = words.map(w => {
+    const lower = w.toLowerCase().trim();
+    return hindiMap[lower] || w;
+  });
+  document.getElementById('hindi-output').value = converted.join('');
+}
+function copyHindi() {
+  const text = document.getElementById('hindi-output').value;
+  navigator.clipboard.writeText(text).then(() => alert('Hindi text copied!')).catch(() => { document.getElementById('hindi-output').select(); document.execCommand('copy'); });
+}
+</script>
+</body>
+</html>
