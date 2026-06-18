@@ -221,6 +221,7 @@
     <button class="nav-item" id="nav-pdf" onclick="showTool('pdf')"><span class="nav-icon">📄</span> PDF Compressor</button>
     <button class="nav-item" id="nav-resume" onclick="showTool('resume')"><span class="nav-icon">📋</span> Resume Builder</button>
     <button class="nav-item" id="nav-invoice" onclick="showTool('invoice')"><span class="nav-icon">🧾</span> Invoice Generator</button>
+    <button class="nav-item" id="nav-jpgpdf" onclick="showTool('jpgpdf')"><span class="nav-icon">🖼️</span> JPG to PDF</button>
   </div>
   <div class="nav-section">
     <div class="nav-label">Utilities</div>
@@ -246,6 +247,7 @@
     <div class="home-card" onclick="showTool('emi')"><div class="hc-icon">🏦</div><div class="hc-name">EMI Calculator</div><div class="hc-desc">Home, Car, Personal loan EMI with schedule</div><span class="hc-badge">High Traffic</span></div>
     <div class="home-card" onclick="showTool('tax')"><div class="hc-icon">📊</div><div class="hc-name">Income Tax</div><div class="hc-desc">Old vs New regime — FY 2024-25</div><span class="hc-badge">Tax Season</span></div>
     <div class="home-card" onclick="showTool('pdf')"><div class="hc-icon">📄</div><div class="hc-name">PDF Compressor</div><div class="hc-desc">Compress & merge PDF for government portals</div></div>
+    <div class="home-card" onclick="showTool('jpgpdf')"><div class="hc-icon">🖼️</div><div class="hc-name">JPG to PDF</div><div class="hc-desc">Convert images into PDF instantly</div></div>
     <div class="home-card" onclick="showTool('resume')"><div class="hc-icon">📋</div><div class="hc-name">Resume Builder</div><div class="hc-desc">ATS-friendly resume, download as PDF</div></div>
     <div class="home-card" onclick="showTool('invoice')"><div class="hc-icon">🧾</div><div class="hc-name">Invoice Generator</div><div class="hc-desc">GST invoice for freelancers & small shops</div></div>
     <div class="home-card" onclick="showTool('age')"><div class="hc-icon">🎂</div><div class="hc-name">Age Calculator</div><div class="hc-desc">Exact age in years, months & days</div></div>
@@ -1092,5 +1094,6 @@ function copyHindi() {
   <a href="/privacy.html" style="color:#3B6EF6; text-decoration:none;">Privacy Policy</a>
   </p>
 </footer>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </body>
 </html>
