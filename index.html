@@ -84,6 +84,9 @@
   .tool-eyebrow { font-size: 11px; font-weight: 600; letter-spacing: 0.07em; text-transform: uppercase; color: var(--accent); margin-bottom: 6px; }
   .tool-title { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 24px; font-weight: 700; color: var(--text-primary); }
   .tool-desc { font-size: 14px; color: var(--text-secondary); margin-top: 4px; line-height: 1.6; }
+  .back-btn { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 500; color: var(--text-secondary); background: none; border: none; cursor: pointer; padding: 6px 0; margin-bottom: 10px; font-family: inherit; }
+  .back-btn:hover { color: var(--accent); }
+  .back-btn svg { width: 16px; height: 16px; }
 
   .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 1.5rem; box-shadow: var(--shadow); }
   .card + .card { margin-top: 1rem; }
@@ -182,6 +185,13 @@
   .file-remove:hover { color: #DC2626; background: #FEE2E2; }
 
   .tag { display: inline-block; font-size: 11px; padding: 2px 8px; border-radius: 10px; background: var(--bg); border: 1px solid var(--border); color: var(--text-secondary); margin: 2px; }
+
+  /* image preview thumb grid (for jpg-to-pdf) */
+  .thumb-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(110px,1fr)); gap: 10px; margin-top: 1rem; }
+  .thumb-item { position: relative; border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; background: white; }
+  .thumb-item img { width: 100%; height: 110px; object-fit: cover; display: block; }
+  .thumb-item .thumb-num { position: absolute; top: 4px; left: 4px; background: rgba(0,0,0,0.6); color: white; font-size: 11px; padding: 1px 6px; border-radius: 4px; }
+  .thumb-item .thumb-remove { position: absolute; top: 4px; right: 4px; background: rgba(220,38,38,0.9); color: white; border: none; width: 20px; height: 20px; border-radius: 50%; font-size: 13px; line-height: 1; cursor: pointer; }
 </style>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4715399445372174"
      crossorigin="anonymous"></script>
@@ -196,7 +206,7 @@
     </div>
     Tools4India
   </a>
-  <span class="header-tagline">10 Free Tools for Every Indian</span>
+  <span class="header-tagline">12 Free Tools for Every Indian</span>
   <button class="menu-btn" onclick="toggleSidebar()" aria-label="Toggle menu">
     <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
   </button>
@@ -219,6 +229,8 @@
   <div class="nav-section">
     <div class="nav-label">Documents</div>
     <button class="nav-item" id="nav-pdf" onclick="showTool('pdf')"><span class="nav-icon">📄</span> PDF Compressor</button>
+    <button class="nav-item" id="nav-jpgtopdf" onclick="showTool('jpgtopdf')"><span class="nav-icon">🖼️</span> JPG to PDF</button>
+    <button class="nav-item" id="nav-pdftojpg" onclick="showTool('pdftojpg')"><span class="nav-icon">📑</span> PDF to JPG</button>
     <button class="nav-item" id="nav-resume" onclick="showTool('resume')"><span class="nav-icon">📋</span> Resume Builder</button>
     <button class="nav-item" id="nav-invoice" onclick="showTool('invoice')"><span class="nav-icon">🧾</span> Invoice Generator</button>
   </div>
@@ -246,6 +258,8 @@
     <div class="home-card" onclick="showTool('emi')"><div class="hc-icon">🏦</div><div class="hc-name">EMI Calculator</div><div class="hc-desc">Home, Car, Personal loan EMI with schedule</div><span class="hc-badge">High Traffic</span></div>
     <div class="home-card" onclick="showTool('tax')"><div class="hc-icon">📊</div><div class="hc-name">Income Tax</div><div class="hc-desc">Old vs New regime — FY 2024-25</div><span class="hc-badge">Tax Season</span></div>
     <div class="home-card" onclick="showTool('pdf')"><div class="hc-icon">📄</div><div class="hc-name">PDF Compressor</div><div class="hc-desc">Compress & merge PDF for government portals</div></div>
+    <div class="home-card" onclick="showTool('jpgtopdf')"><div class="hc-icon">🖼️</div><div class="hc-name">JPG to PDF</div><div class="hc-desc">Convert one or more images into a single PDF</div><span class="hc-badge">New</span></div>
+    <div class="home-card" onclick="showTool('pdftojpg')"><div class="hc-icon">📑</div><div class="hc-name">PDF to JPG</div><div class="hc-desc">Convert PDF pages into downloadable JPG images</div><span class="hc-badge">New</span></div>
     <div class="home-card" onclick="showTool('resume')"><div class="hc-icon">📋</div><div class="hc-name">Resume Builder</div><div class="hc-desc">ATS-friendly resume, download as PDF</div></div>
     <div class="home-card" onclick="showTool('invoice')"><div class="hc-icon">🧾</div><div class="hc-name">Invoice Generator</div><div class="hc-desc">GST invoice for freelancers & small shops</div></div>
     <div class="home-card" onclick="showTool('age')"><div class="hc-icon">🎂</div><div class="hc-name">Age Calculator</div><div class="hc-desc">Exact age in years, months & days</div></div>
@@ -451,6 +465,88 @@
       <svg width="16" height="16" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
       Process & Download PDF
     </button>
+    <p style="font-size:12px;color:var(--text-tertiary);text-align:center;margin-top:8px">Files processed in browser — never uploaded to any server</p>
+  </div>
+</div>
+
+<!-- ═══════════ JPG TO PDF ═══════════ -->
+<div class="tool-panel" id="panel-jpgtopdf">
+  <div class="tool-header">
+    <div class="tool-eyebrow">Document Tool</div>
+    <div class="tool-title">JPG to PDF Converter</div>
+    <div class="tool-desc">Convert one or more images into a single PDF file — fully in your browser, nothing uploaded anywhere.</div>
+  </div>
+
+  <div class="card">
+    <div class="drop-zone" id="j2p-drop" onclick="document.getElementById('j2p-input').click()">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+      <p>Click to select images (JPG, PNG, WEBP)</p>
+      <span>You can select multiple images at once</span>
+    </div>
+    <input type="file" id="j2p-input" accept="image/*" multiple style="display:none" onchange="handleJ2PSelect(this)">
+
+    <div id="j2p-thumbs" class="thumb-grid"></div>
+
+    <div id="j2p-options" style="display:none;margin-top:1rem">
+      <hr class="divider">
+      <div class="grid-2">
+        <div class="field">
+          <label>Page Size</label>
+          <select id="j2p-pagesize">
+            <option value="a4" selected>A4</option>
+            <option value="fit">Fit to Image</option>
+            <option value="letter">US Letter</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Orientation</label>
+          <select id="j2p-orientation">
+            <option value="auto" selected>Auto (based on image)</option>
+            <option value="portrait">Portrait</option>
+            <option value="landscape">Landscape</option>
+          </select>
+        </div>
+      </div>
+      <button class="btn" style="width:100%;margin-top:0.5rem" onclick="convertJ2P()">
+        <svg width="16" height="16" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Convert to PDF & Download
+      </button>
+      <p style="font-size:12px;color:var(--text-tertiary);text-align:center;margin-top:8px">Images are processed entirely in your browser — never uploaded</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ PDF TO JPG ═══════════ -->
+<div class="tool-panel" id="panel-pdftojpg">
+  <div class="tool-header">
+    <div class="tool-eyebrow">Document Tool</div>
+    <div class="tool-title">PDF to JPG Converter</div>
+    <div class="tool-desc">Convert each page of your PDF into a downloadable JPG image — processed locally in your browser.</div>
+  </div>
+
+  <div class="card">
+    <div class="drop-zone" id="p2j-drop" onclick="document.getElementById('p2j-input').click()">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
+      <p>Click to select a PDF file</p>
+      <span>Maximum file size: 50MB</span>
+    </div>
+    <input type="file" id="p2j-input" accept=".pdf" style="display:none" onchange="handleP2JSelect(this)">
+
+    <div id="p2j-status" style="display:none;margin-top:1rem">
+      <div class="field">
+        <label>Image Quality</label>
+        <select id="p2j-quality">
+          <option value="0.7">Smaller File (lower quality)</option>
+          <option value="0.9" selected>Balanced (recommended)</option>
+          <option value="1.0">Best Quality (larger file)</option>
+        </select>
+      </div>
+      <p style="font-size:13px;color:var(--text-secondary)" id="p2j-info"></p>
+    </div>
+
+    <div id="p2j-pages" class="thumb-grid"></div>
+
+    <button class="btn" id="p2j-download-all" style="width:100%;margin-top:1rem;display:none" onclick="downloadAllP2J()">Download All Pages (ZIP not needed — one click each)</button>
     <p style="font-size:12px;color:var(--text-tertiary);text-align:center;margin-top:8px">Files processed in browser — never uploaded to any server</p>
   </div>
 </div>
@@ -723,11 +819,31 @@
 
 </main>
 
+<!-- jsPDF for JPG to PDF conversion -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<!-- pdf.js for PDF to JPG conversion -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+
 <script>
 // ── Sidebar & Nav ──
 function toggleSidebar() {
   document.getElementById('sidebar').classList.toggle('open');
 }
+
+function addBackButtons() {
+  document.querySelectorAll('.tool-panel').forEach(panel => {
+    if (panel.id === 'panel-home') return; // home pe back button nahi chahiye
+    const header = panel.querySelector('.tool-header');
+    if (header && !header.querySelector('.back-btn')) {
+      const btn = document.createElement('button');
+      btn.className = 'back-btn';
+      btn.innerHTML = '<svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg> Back to All Tools';
+      btn.onclick = () => showTool('home');
+      header.insertBefore(btn, header.firstChild);
+    }
+  });
+}
+
 function showTool(id) {
   document.querySelectorAll('.tool-panel').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
@@ -899,6 +1015,164 @@ function processPDF() {
   alert('PDF processing requires a server-side library (pdf-lib). For full implementation, upload this website to a server and add pdf-lib.js. This demo shows the UI flow.');
 }
 
+// ── JPG TO PDF ──
+let j2pFiles = []; // {file, dataUrl}
+function handleJ2PSelect(inp) {
+  const newFiles = Array.from(inp.files);
+  let pending = newFiles.length;
+  if (!pending) return;
+  newFiles.forEach(file => {
+    const reader = new FileReader();
+    reader.onload = e => {
+      j2pFiles.push({ file, dataUrl: e.target.result });
+      pending--;
+      if (pending === 0) renderJ2PThumbs();
+    };
+    reader.readAsDataURL(file);
+  });
+}
+function renderJ2PThumbs() {
+  const wrap = document.getElementById('j2p-thumbs');
+  wrap.innerHTML = j2pFiles.map((item, i) => `
+    <div class="thumb-item">
+      <span class="thumb-num">${i+1}</span>
+      <button class="thumb-remove" onclick="removeJ2P(${i})">×</button>
+      <img src="${item.dataUrl}" alt="page ${i+1}">
+    </div>
+  `).join('');
+  document.getElementById('j2p-options').style.display = j2pFiles.length ? 'block' : 'none';
+}
+function removeJ2P(i) {
+  j2pFiles.splice(i, 1);
+  renderJ2PThumbs();
+}
+function convertJ2P() {
+  if (!j2pFiles.length) { alert('Please select at least one image.'); return; }
+  if (typeof window.jspdf === 'undefined') { alert('PDF library is still loading, please try again in a moment.'); return; }
+  const { jsPDF } = window.jspdf;
+  const pageSizeChoice = document.getElementById('j2p-pagesize').value;
+  const orientationChoice = document.getElementById('j2p-orientation').value;
+
+  let loaded = 0;
+  const imgs = [];
+  j2pFiles.forEach((item, i) => {
+    const img = new Image();
+    img.onload = () => {
+      imgs[i] = img;
+      loaded++;
+      if (loaded === j2pFiles.length) buildPdf(imgs);
+    };
+    img.src = item.dataUrl;
+  });
+
+  function buildPdf(imgs) {
+    let doc;
+    imgs.forEach((img, i) => {
+      const isLandscapeImg = img.width > img.height;
+      let orientation = orientationChoice === 'auto' ? (isLandscapeImg ? 'landscape' : 'portrait') : orientationChoice;
+      let format = pageSizeChoice === 'letter' ? 'letter' : (pageSizeChoice === 'fit' ? [img.width, img.height] : 'a4');
+
+      if (i === 0) {
+        doc = new jsPDF({ orientation: pageSizeChoice === 'fit' ? (isLandscapeImg ? 'landscape':'portrait') : orientation, unit: 'pt', format });
+      } else {
+        doc.addPage(format, pageSizeChoice === 'fit' ? (isLandscapeImg ? 'landscape':'portrait') : orientation);
+      }
+      const pageW = doc.internal.pageSize.getWidth();
+      const pageH = doc.internal.pageSize.getHeight();
+      let drawW, drawH;
+      if (pageSizeChoice === 'fit') {
+        drawW = pageW; drawH = pageH;
+      } else {
+        const scale = Math.min(pageW / img.width, pageH / img.height);
+        drawW = img.width * scale;
+        drawH = img.height * scale;
+      }
+      const x = (pageW - drawW) / 2;
+      const y = (pageH - drawH) / 2;
+      const format2 = item_format(j2pFiles[i].file.name);
+      doc.addImage(img, format2, x, y, drawW, drawH);
+    });
+    doc.save('tools4india_converted.pdf');
+  }
+  function item_format(name) {
+    const ext = name.split('.').pop().toUpperCase();
+    if (ext === 'PNG') return 'PNG';
+    if (ext === 'WEBP') return 'WEBP';
+    return 'JPEG';
+  }
+}
+
+// ── PDF TO JPG ──
+let p2jPdfDoc = null;
+let p2jPages = []; // dataURLs
+if (window['pdfjsLib']) {
+  pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+}
+function handleP2JSelect(inp) {
+  const file = inp.files[0];
+  if (!file) return;
+  document.getElementById('p2j-status').style.display = 'block';
+  document.getElementById('p2j-info').textContent = 'Loading PDF...';
+  document.getElementById('p2j-pages').innerHTML = '';
+  document.getElementById('p2j-download-all').style.display = 'none';
+  p2jPages = [];
+
+  const reader = new FileReader();
+  reader.onload = async function(e) {
+    try {
+      const typedarray = new Uint8Array(e.target.result);
+      p2jPdfDoc = await pdfjsLib.getDocument({ data: typedarray }).promise;
+      document.getElementById('p2j-info').textContent = `${p2jPdfDoc.numPages} page(s) found. Rendering...`;
+      await renderAllPages();
+    } catch (err) {
+      document.getElementById('p2j-info').textContent = 'Could not read this PDF. Please try another file.';
+    }
+  };
+  reader.readAsArrayBuffer(file);
+}
+async function renderAllPages() {
+  const quality = parseFloat(document.getElementById('p2j-quality').value);
+  const wrap = document.getElementById('p2j-pages');
+  wrap.innerHTML = '';
+  p2jPages = [];
+  for (let i = 1; i <= p2jPdfDoc.numPages; i++) {
+    const page = await p2jPdfDoc.getPage(i);
+    const viewport = page.getViewport({ scale: 2 });
+    const canvas = document.createElement('canvas');
+    canvas.width = viewport.width;
+    canvas.height = viewport.height;
+    const ctx = canvas.getContext('2d');
+    await page.render({ canvasContext: ctx, viewport }).promise;
+    const dataUrl = canvas.toDataURL('image/jpeg', quality);
+    p2jPages.push(dataUrl);
+
+    const div = document.createElement('div');
+    div.className = 'thumb-item';
+    div.style.cursor = 'pointer';
+    div.innerHTML = `<span class="thumb-num">${i}</span><img src="${dataUrl}" alt="page ${i}">`;
+    div.onclick = () => downloadOneP2J(i - 1);
+    wrap.appendChild(div);
+  }
+  document.getElementById('p2j-info').textContent = `${p2jPdfDoc.numPages} page(s) ready — click a thumbnail to download that page, or download all below.`;
+  document.getElementById('p2j-download-all').style.display = p2jPages.length ? 'block' : 'none';
+}
+document.addEventListener('change', function(e) {
+  if (e.target && e.target.id === 'p2j-quality' && p2jPdfDoc) {
+    renderAllPages();
+  }
+});
+function downloadOneP2J(i) {
+  const link = document.createElement('a');
+  link.download = `page_${i + 1}.jpg`;
+  link.href = p2jPages[i];
+  link.click();
+}
+function downloadAllP2J() {
+  p2jPages.forEach((dataUrl, i) => {
+    setTimeout(() => downloadOneP2J(i), i * 300);
+  });
+}
+
 // ── RESUME ──
 function updateResume() {
   const g = id => document.getElementById(id).value;
@@ -959,6 +1233,7 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('age-target').value = new Date().toISOString().split('T')[0];
   document.getElementById('inv-date').value = new Date().toISOString().split('T')[0];
   calcEMI();
+  addBackButtons();
 });
 function calcAge() {
   const dob = new Date(document.getElementById('age-dob').value);
@@ -1092,6 +1367,5 @@ function copyHindi() {
   <a href="/privacy.html" style="color:#3B6EF6; text-decoration:none;">Privacy Policy</a>
   </p>
 </footer>
- 
 </body>
 </html>
