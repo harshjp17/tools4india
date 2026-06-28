@@ -4,40 +4,1163 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Hindi Typing Tool — Type in Hinglish Get Devanagari Hindi | Tools4India</title>
-<meta name="description" content="Free Hindi typing tool. Type in Hinglish (Roman English letters) and instantly get proper Hindi Devanagari text — perfect for letters and applications.">
-<meta name="keywords" content="hinglish to hindi converter, type in hindi online, hindi typing tool, roman to hindi converter, hindi typing without keyboard">
+
+<meta name="title" content="Hindi Typing Tool — Type in Hinglish Get Devanagari Hindi | Tools4India">
+<meta name="description" content="Free Hindi typing tool. Type in Hinglish (English letters) and instantly get proper Hindi Devanagari script. Perfect for letters and applications.">
 <meta name="robots" content="index, follow">
-<link rel="canonical" href="https://tools4india.com/hindi-typing.html">
+<meta name="language" content="English">
+<meta name="author" content="Tools4India">
+<link rel="canonical" href="https://tools4india.com/hindi-typing">
+
 <link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180.png">
 
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://tools4india.com/hindi-typing.html">
+<meta property="og:url" content="https://tools4india.com/hindi-typing">
 <meta property="og:title" content="Hindi Typing Tool — Type in Hinglish Get Devanagari Hindi | Tools4India">
-<meta property="og:description" content="Free Hindi typing tool. Type in Hinglish (Roman English letters) and instantly get proper Hindi Devanagari text — perfect for letters and applications.">
+<meta property="og:description" content="Free Hindi typing tool. Type in Hinglish (English letters) and instantly get proper Hindi Devanagari script. Perfect for letters and applications.">
 <meta property="og:image" content="https://tools4india.com/favicon-512.png">
 <meta property="og:locale" content="en_IN">
 <meta property="og:site_name" content="Tools4India">
 
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:url" content="https://tools4india.com/hindi-typing">
 <meta name="twitter:title" content="Hindi Typing Tool — Type in Hinglish Get Devanagari Hindi | Tools4India">
-<meta name="twitter:description" content="Free Hindi typing tool. Type in Hinglish (Roman English letters) and instantly get proper Hindi Devanagari text — perfect for letters and applications.">
+<meta name="twitter:description" content="Free Hindi typing tool. Type in Hinglish (English letters) and instantly get proper Hindi Devanagari script. Perfect for letters and applications.">
+<meta name="twitter:image" content="https://tools4india.com/favicon-512.png">
 
-<meta http-equiv="refresh" content="3;url=/#hindi">
-<script>window.location.replace('/#hindi');</script>
-
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Hindi Typing Tool — Hinglish to Hindi Converter Free",
+  "url": "https://tools4india.com/hindi-typing",
+  "description": "Free Hindi typing tool. Type in Hinglish (English letters) and instantly get proper Hindi Devanagari script. Perfect for letters and applications.",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "INR"
+  },
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "Tools4India",
+    "url": "https://tools4india.com/"
+  }
+}
+</script>
 <style>
-  body { font-family: Arial, sans-serif; max-width: 640px; margin: 60px auto; padding: 0 24px; color: #111827; line-height: 1.7; text-align: center; }
-  h1 { font-size: 26px; color: #3B6EF6; margin-bottom: 12px; }
-  p { color: #4B5563; font-size: 15px; }
-  a { color: #3B6EF6; font-weight: 600; text-decoration: none; }
-  .spinner { margin: 24px auto; width: 28px; height: 28px; border: 3px solid #E4E7EF; border-top-color: #3B6EF6; border-radius: 50%; animation: spin 0.8s linear infinite; }
-  @keyframes spin { to { transform: rotate(360deg); } }
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #F8F9FC;
+    --surface: #FFFFFF;
+    --border: #E4E7EF;
+    --accent: #3B6EF6;
+    --accent-light: #EEF2FF;
+    --accent-dark: #2952D9;
+    --text-primary: #111827;
+    --text-secondary: #6B7280;
+    --text-tertiary: #9CA3AF;
+    --success: #059669;
+    --success-bg: #ECFDF5;
+    --warning: #D97706;
+    --warning-bg: #FFFBEB;
+    --sidebar-w: 260px;
+    --header-h: 58px;
+    --radius: 10px;
+    --radius-lg: 14px;
+    --shadow: 0 1px 3px rgba(0,0,0,0.07), 0 1px 2px rgba(0,0,0,0.04);
+    --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+  }
+
+  body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text-primary); min-height: 100vh; }
+
+  /* ── Header ── */
+  header {
+    position: fixed; top: 0; left: 0; right: 0; height: var(--header-h);
+    background: var(--surface); border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; padding: 0 1.25rem; gap: 1rem; z-index: 100;
+    box-shadow: var(--shadow);
+  }
+  .logo { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 18px; font-weight: 700; color: var(--accent); text-decoration: none; display: flex; align-items: center; gap: 8px; }
+  .logo-icon { width: 30px; height: 30px; background: var(--accent); border-radius: 8px; display: flex; align-items: center; justify-content: center; }
+  .logo-icon svg { width: 16px; height: 16px; fill: white; }
+  .header-tagline { font-size: 12px; color: var(--text-tertiary); border-left: 1px solid var(--border); padding-left: 1rem; margin-left: auto; display: none; }
+  @media(min-width:640px){ .header-tagline { display: block; } }
+  .menu-btn { display: none; background: none; border: none; cursor: pointer; padding: 6px; border-radius: 6px; color: var(--text-secondary); }
+  .menu-btn:hover { background: var(--bg); }
+  @media(max-width:768px){ .menu-btn { display: flex; align-items: center; margin-left: auto; } }
+
+  /* ── Sidebar ── */
+  aside {
+    position: fixed; top: var(--header-h); left: 0; bottom: 0;
+    width: var(--sidebar-w); background: var(--surface);
+    border-right: 1px solid var(--border); overflow-y: auto;
+    padding: 1rem 0; transition: transform .25s ease; z-index: 90;
+  }
+  aside::-webkit-scrollbar { width: 4px; }
+  aside::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+  @media(max-width:768px){ aside { transform: translateX(-100%); } aside.open { transform: translateX(0); box-shadow: var(--shadow-md); } }
+
+  .nav-section { padding: 0 0.75rem 0.5rem; }
+  .nav-label { font-size: 10px; font-weight: 600; letter-spacing: 0.08em; color: var(--text-tertiary); text-transform: uppercase; padding: 0.5rem 0.5rem 0.35rem; }
+  .nav-item {
+    display: flex; align-items: center; gap: 10px; padding: 9px 12px;
+    border-radius: 8px; cursor: pointer; font-size: 13.5px; color: var(--text-secondary);
+    transition: all .15s; border: none; background: none; width: 100%; text-align: left;
+    text-decoration: none; box-sizing: border-box;
+  }
+  .nav-item:hover { background: var(--bg); color: var(--text-primary); }
+  .nav-item.active { background: var(--accent-light); color: var(--accent); font-weight: 500; }
+  .nav-item .nav-icon { width: 28px; height: 28px; border-radius: 6px; background: var(--bg); display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; }
+  .nav-item.active .nav-icon { background: var(--accent-light); }
+
+  /* ── Main ── */
+  main { margin-left: var(--sidebar-w); margin-top: var(--header-h); padding: 2rem 1.5rem; min-height: calc(100vh - var(--header-h)); }
+  @media(max-width:768px){ main { margin-left: 0; padding: 1.25rem 1rem; } }
+
+  /* ── Tool Panel ── */
+  .tool-panel { display: none; max-width: 780px; }
+  .tool-panel.active { display: block; }
+  .tool-header { margin-bottom: 1.5rem; }
+  .back-btn { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 500; color: var(--text-secondary); background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); cursor: pointer; padding: 8px 14px; margin-bottom: 14px; font-family: inherit; transition: all .15s; }
+  .back-btn:hover { color: var(--accent); border-color: #C7D7FD; background: var(--accent-light); }
+  .back-btn svg { width: 16px; height: 16px; }
+  .back-btn-bottom { margin-top: 1.5rem; margin-bottom: 0; }
+  .seo-content { margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--border); max-width: 780px; }
+  .seo-content h2 { font-size: 17px; color: var(--text-primary); margin: 22px 0 8px; }
+  .seo-content h2:first-child { margin-top: 0; }
+  .seo-content p { font-size: 14px; color: var(--text-secondary); line-height: 1.7; margin-bottom: 4px; }
+  .seo-content .faq-q { font-weight: 600; font-size: 14px; color: var(--text-primary); margin-top: 14px; }
+  .seo-content .faq-a { font-size: 13.5px; color: var(--text-secondary); margin-top: 3px; }
+  .tool-eyebrow { font-size: 11px; font-weight: 600; letter-spacing: 0.07em; text-transform: uppercase; color: var(--accent); margin-bottom: 6px; }
+  .tool-title { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 24px; font-weight: 700; color: var(--text-primary); }
+  .tool-desc { font-size: 14px; color: var(--text-secondary); margin-top: 4px; line-height: 1.6; }
+
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 1.5rem; box-shadow: var(--shadow); }
+  .card + .card { margin-top: 1rem; }
+
+  /* ── Form Elements ── */
+  .field { margin-bottom: 1rem; }
+  .field:last-child { margin-bottom: 0; }
+  label { display: block; font-size: 13px; font-weight: 500; color: var(--text-secondary); margin-bottom: 5px; }
+  input[type=number], input[type=text], input[type=date], select, textarea {
+    width: 100%; padding: 9px 12px; border: 1px solid var(--border); border-radius: var(--radius);
+    font-size: 14px; font-family: inherit; color: var(--text-primary); background: var(--bg);
+    transition: border-color .15s; outline: none;
+  }
+  input:focus, select:focus, textarea:focus { border-color: var(--accent); background: white; box-shadow: 0 0 0 3px rgba(59,110,246,0.1); }
+  input[type=range] { width: 100%; accent-color: var(--accent); cursor: pointer; }
+
+  .btn {
+    display: inline-flex; align-items: center; gap: 6px; padding: 10px 20px;
+    background: var(--accent); color: white; border: none; border-radius: var(--radius);
+    font-size: 14px; font-weight: 500; font-family: inherit; cursor: pointer; transition: all .15s;
+  }
+  .btn:hover { background: var(--accent-dark); transform: translateY(-1px); }
+  .btn:active { transform: translateY(0); }
+  .btn-outline { background: none; color: var(--accent); border: 1px solid var(--accent); }
+  .btn-outline:hover { background: var(--accent-light); transform: none; }
+  .btn-sm { padding: 7px 14px; font-size: 13px; }
+
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; }
+  @media(max-width:540px){ .grid-2, .grid-3 { grid-template-columns: 1fr; } }
+
+  /* ── Result Box ── */
+  .result-box { background: var(--accent-light); border: 1px solid #C7D7FD; border-radius: var(--radius); padding: 1.25rem; margin-top: 1rem; }
+  .result-box.success { background: var(--success-bg); border-color: #A7F3D0; }
+  .result-box.warning { background: var(--warning-bg); border-color: #FDE68A; }
+  .result-label { font-size: 12px; font-weight: 500; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.06em; }
+  .result-value { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 28px; font-weight: 700; color: var(--accent); margin: 4px 0; }
+  .result-value.success { color: var(--success); }
+  .result-sub { font-size: 13px; color: var(--text-secondary); }
+
+  .stat-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px; margin-top: 1rem; }
+  .stat-card { background: white; border: 1px solid var(--border); border-radius: var(--radius); padding: 0.875rem 1rem; }
+  .stat-card .s-label { font-size: 11px; color: var(--text-tertiary); margin-bottom: 3px; }
+  .stat-card .s-value { font-size: 17px; font-weight: 600; color: var(--text-primary); }
+
+  /* ── AdSense Placeholder ── */
+  .ad-slot { background: var(--bg); border: 1px dashed var(--border); border-radius: var(--radius); padding: 1rem; text-align: center; font-size: 12px; color: var(--text-tertiary); margin: 1.25rem 0; min-height: 90px; display: flex; align-items: center; justify-content: center; }
+
+  /* ── PDF Tool ── */
+  .drop-zone { border: 2px dashed var(--border); border-radius: var(--radius-lg); padding: 2.5rem 1.5rem; text-align: center; cursor: pointer; transition: all .2s; background: var(--bg); }
+  .drop-zone:hover, .drop-zone.drag-over { border-color: var(--accent); background: var(--accent-light); }
+  .drop-zone svg { width: 40px; height: 40px; stroke: var(--text-tertiary); margin-bottom: 0.75rem; }
+  .drop-zone.drag-over svg { stroke: var(--accent); }
+  .drop-zone p { font-size: 14px; color: var(--text-secondary); }
+  .drop-zone span { font-size: 12px; color: var(--text-tertiary); }
+
+  /* ── Resume ── */
+  .resume-preview { background: white; border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; font-size: 13px; line-height: 1.6; }
+  .resume-preview h2 { font-size: 20px; font-weight: 700; color: var(--text-primary); }
+  .resume-preview h3 { font-size: 13px; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: 0.06em; border-bottom: 1px solid var(--border); padding-bottom: 4px; margin: 14px 0 8px; }
+  .resume-preview p { color: var(--text-secondary); font-size: 12.5px; margin: 2px 0; }
+  .resume-preview .contact-line { color: var(--text-tertiary); font-size: 12px; }
+
+  /* ── Home grid ── */
+  .home-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; }
+  .home-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 1.25rem 1.25rem 1rem; cursor: pointer; transition: all .18s; box-shadow: var(--shadow); display: block; text-decoration: none; }
+  .home-card:hover { box-shadow: var(--shadow-md); border-color: #C7D7FD; transform: translateY(-2px); }
+  .home-card .hc-icon { font-size: 26px; margin-bottom: 10px; }
+  .home-card .hc-name { font-size: 14px; font-weight: 600; color: var(--text-primary); margin-bottom: 4px; }
+  .home-card .hc-desc { font-size: 12px; color: var(--text-secondary); line-height: 1.5; }
+  .home-card .hc-badge { display: inline-block; margin-top: 8px; font-size: 10px; font-weight: 600; padding: 2px 8px; border-radius: 10px; background: var(--accent-light); color: var(--accent); }
+
+  /* progress bar */
+  .prog-bar { height: 8px; background: var(--border); border-radius: 4px; overflow: hidden; margin: 6px 0; }
+  .prog-bar-fill { height: 100%; background: var(--accent); border-radius: 4px; transition: width .4s; }
+
+  /* table */
+  table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 0.75rem; }
+  th { background: var(--bg); font-weight: 600; font-size: 12px; color: var(--text-secondary); padding: 8px 10px; text-align: left; border-bottom: 1px solid var(--border); }
+  td { padding: 8px 10px; border-bottom: 1px solid var(--bg); }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: var(--bg); }
+
+  /* toggle */
+  .toggle-group { display: flex; border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; background: var(--bg); }
+  .toggle-btn { flex: 1; padding: 8px 12px; font-size: 13px; font-family: inherit; border: none; background: none; cursor: pointer; color: var(--text-secondary); transition: all .15s; }
+  .toggle-btn.active { background: var(--accent); color: white; font-weight: 500; }
+
+  .divider { border: none; border-top: 1px solid var(--border); margin: 1.25rem 0; }
+
+  /* file list */
+  .file-item { display: flex; align-items: center; gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--bg); font-size: 13px; }
+  .file-item:last-child { border-bottom: none; }
+  .file-size { font-size: 11px; color: var(--text-tertiary); margin-left: auto; }
+  .file-remove { background: none; border: none; cursor: pointer; color: var(--text-tertiary); font-size: 16px; padding: 2px 6px; border-radius: 4px; }
+  .file-remove:hover { color: #DC2626; background: #FEE2E2; }
+
+  .tag { display: inline-block; font-size: 11px; padding: 2px 8px; border-radius: 10px; background: var(--bg); border: 1px solid var(--border); color: var(--text-secondary); margin: 2px; }
+
+  /* image preview thumb grid (for jpg-to-pdf) */
+  .thumb-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(110px,1fr)); gap: 10px; margin-top: 1rem; }
+  .thumb-item { position: relative; border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; background: white; }
+  .thumb-item img { width: 100%; height: 110px; object-fit: cover; display: block; }
+  .thumb-item .thumb-num { position: absolute; top: 4px; left: 4px; background: rgba(0,0,0,0.6); color: white; font-size: 11px; padding: 1px 6px; border-radius: 4px; }
+  .thumb-item .thumb-remove { position: absolute; top: 4px; right: 4px; background: rgba(220,38,38,0.9); color: white; border: none; width: 20px; height: 20px; border-radius: 50%; font-size: 13px; line-height: 1; cursor: pointer; }
+
+  /* ── Typing Test ── */
+  .typing-stats-bar { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 1.25rem; }
+  @media(max-width:540px){ .typing-stats-bar { grid-template-columns: repeat(2, 1fr); } }
+  .typing-stat { background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 0.75rem 1rem; text-align: center; }
+  .typing-stat .ts-label { font-size: 11px; color: var(--text-tertiary); text-transform: uppercase; letter-spacing: 0.04em; }
+  .typing-stat .ts-value { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 22px; font-weight: 700; color: var(--accent); margin-top: 2px; }
+  .typing-passage {
+    background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius);
+    padding: 1.1rem 1.25rem; font-size: 17px; line-height: 1.9; letter-spacing: 0.2px;
+    user-select: none; cursor: text; min-height: 130px; max-height: 260px; overflow-y: auto;
+    font-family: 'Inter', sans-serif;
+    white-space: normal; word-wrap: break-word; overflow-wrap: break-word;
+  }
+  .typing-passage span { white-space: pre-wrap; display: inline; }
+  .typing-passage .char-correct { color: var(--success); }
+  .typing-passage .char-wrong { color: #DC2626; background: #FEE2E2; border-radius: 2px; }
+  .typing-passage .char-current { background: var(--accent-light); border-bottom: 2px solid var(--accent); border-radius: 2px; }
+  .typing-passage .char-pending { color: var(--text-tertiary); }
+  #typing-hidden-input { position: absolute; opacity: 0; height: 1px; width: 1px; left: -9999px; top: 0; border: none; padding: 0; }
+  .typing-overlay-msg {
+    text-align: center; font-size: 13px; color: var(--text-secondary); margin-top: 0.75rem;
+  }
+  .typing-result-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 1rem; }
+  @media(max-width:540px){ .typing-result-grid { grid-template-columns: 1fr; } }
+  .typing-result-card { background: white; border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem; text-align: center; }
+  .typing-result-card .tr-icon { font-size: 22px; margin-bottom: 4px; }
+  .typing-result-card .tr-value { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 30px; font-weight: 700; color: var(--text-primary); }
+  .typing-result-card .tr-label { font-size: 12px; color: var(--text-secondary); margin-top: 2px; }
+  .typing-result-card.accent .tr-value { color: var(--accent); }
+  .typing-result-card.success .tr-value { color: var(--success); }
 </style>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4715399445372174" crossorigin="anonymous"></script>
 </head>
 <body>
-<h1>Hindi Typing Tool — Hinglish to Hindi Converter</h1>
-<p>Type the way you naturally would in Hinglish — using English letters — and get accurate Hindi text in Devanagari script instantly. This free Hindi Typing Tool is perfect for writing letters, applications, messages, or any content in Hindi without needing a separate Hindi keyboard. Copy the converted Hindi text with one click.</p>
-<div class="spinner"></div>
-<p>Redirecting you to the live tool… if nothing happens, <a href="/#hindi">click here</a>.</p>
+
+<header>
+  <a class="logo" href="/">
+    <div class="logo-icon">
+      <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+    </div>
+    Tools4India
+  </a>
+  <span class="header-tagline">13 Free Tools for Every Indian</span>
+  <button class="menu-btn" onclick="toggleSidebar()" aria-label="Toggle menu">
+    <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+  </button>
+</header>
+
+<aside id="sidebar">
+  <div class="nav-section">
+    <div class="nav-label">Home</div>
+    <a class="nav-item" id="nav-home" href="/"><span class="nav-icon">🏠</span> All Tools</a>
+  </div>
+  <div class="nav-section">
+    <div class="nav-label">Finance & Tax</div>
+    <a class="nav-item" id="nav-gst" href="/gst-calculator"><span class="nav-icon">🧾</span> GST Calculator</a>
+    <a class="nav-item" id="nav-emi" href="/emi-calculator"><span class="nav-icon">🏦</span> EMI Calculator</a>
+    <a class="nav-item" id="nav-tax" href="/income-tax-calculator"><span class="nav-icon">📊</span> Income Tax</a>
+  </div>
+  <div class="nav-section">
+    <div class="nav-label">Documents</div>
+    <a class="nav-item" id="nav-pdf" href="/pdf-compressor"><span class="nav-icon">📄</span> PDF Compressor</a>
+    <a class="nav-item" id="nav-jpgtopdf" href="/jpg-to-pdf"><span class="nav-icon">🖼️</span> JPG to PDF</a>
+    <a class="nav-item" id="nav-pdftojpg" href="/pdf-to-jpg"><span class="nav-icon">📑</span> PDF to JPG</a>
+    <a class="nav-item" id="nav-resume" href="/resume-builder"><span class="nav-icon">📋</span> Resume Builder</a>
+    <a class="nav-item" id="nav-invoice" href="/gst-invoice-generator"><span class="nav-icon">🧾</span> Invoice Generator</a>
+  </div>
+  <div class="nav-section">
+    <div class="nav-label">Utilities</div>
+    <a class="nav-item" id="nav-age" href="/age-calculator"><span class="nav-icon">🎂</span> Age Calculator</a>
+    <a class="nav-item" id="nav-cgpa" href="/cgpa-to-percentage"><span class="nav-icon">🎓</span> CGPA Converter</a>
+    <a class="nav-item" id="nav-img" href="/image-compressor"><span class="nav-icon">🖼️</span> Image Compressor</a>
+    <a class="nav-item active" id="nav-hindi" href="/hindi-typing"><span class="nav-icon">🔤</span> Hindi Typing</a>
+    <a class="nav-item" id="nav-typing" href="/typing-test"><span class="nav-icon">⌨️</span> Typing Test</a>
+  </div>
+</aside>
+
+<main>
+<div class="tool-panel active" id="panel-hindi">
+<button class="back-btn" onclick="window.location.href='/'">
+  <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg> Back to All Tools
+</button>
+<div class="tool-panel" id="panel-hindi">
+<div class="tool-header">
+<div class="tool-eyebrow">Language Tool</div>
+<h1 class="tool-title">Hindi Typing Tool</h1>
+<div class="tool-desc">Type in Hinglish (Roman English) and get proper Hindi Devanagari. Perfect for letters, applications.</div>
+</div>
+<div class="card">
+<div class="grid-2" style="gap:1rem">
+<div class="field" style="margin-bottom:0">
+<label>Type in Hinglish (English letters)</label>
+<textarea id="hindi-input" oninput="convertHindi()" placeholder="namaskar mera naam rahul hai
+main surat mein rehta hoon
+mujhe kaam chahiye..." rows="8" style="resize:vertical"></textarea>
+</div>
+<div class="field" style="margin-bottom:0">
+<label>Hindi Output (Devanagari)</label>
+<textarea id="hindi-output" placeholder="यहाँ हिंदी में दिखेगा..." readonly="" rows="8" style="resize:vertical;font-size:16px;line-height:1.8;background:var(--accent-light)"></textarea>
+</div>
+</div>
+<div style="display:flex;gap:8px;margin-top:0.75rem;flex-wrap:wrap">
+<button class="btn btn-sm" onclick="copyHindi()">Copy Hindi Text</button>
+<button class="btn btn-outline btn-sm" onclick="document.getElementById('hindi-input').value='';document.getElementById('hindi-output').value=''">Clear</button>
+</div>
+<div style="margin-top:1rem;background:var(--bg);border-radius:var(--radius);padding:0.875rem">
+<p style="font-size:12px;font-weight:600;color:var(--text-secondary);margin-bottom:6px">Quick Reference</p>
+<div style="display:flex;flex-wrap:wrap;gap:4px;font-size:12px">
+<span class="tag">namaskar → नमस्कार</span>
+<span class="tag">dhanyavaad → धन्यवाद</span>
+<span class="tag">aap → आप</span>
+<span class="tag">main → मैं</span>
+<span class="tag">hai → है</span>
+<span class="tag">hoon → हूँ</span>
+<span class="tag">chahiye → चाहिए</span>
+<span class="tag">kaam → काम</span>
+</div>
+</div>
+</div>
+<div class="seo-content">
+<h2>Why Use a Hinglish to Hindi Converter?</h2>
+<p>Most Indian keyboards and typing habits are based on English (QWERTY) layouts, making it difficult to type fluently in Hindi using a native Devanagari keyboard. This tool lets you type phonetically in English letters — exactly how the word sounds — and automatically converts it to correct Hindi script.</p>
+<h2>Who Uses Hindi Typing Tools?</h2>
+<p>This tool is useful for writing formal letters and applications in Hindi, drafting social media posts or messages, students completing Hindi-language assignments, and anyone who thinks in Hindi but types more comfortably in English letters.</p>
+<h2>Tips for Better Conversion</h2>
+<p>For the most accurate results, type complete common words rather than partial words, and use standard spellings. The quick-reference guide above shows common word conversions to help you type more naturally.</p>
+<h2>Frequently Asked Questions</h2>
+<p class="faq-q">Do I need a Hindi keyboard to use this tool?</p>
+<p class="faq-a">No, that's the entire point of this tool — you can type using your regular English keyboard, and the tool converts your Hinglish text into Hindi Devanagari script.</p>
+<p class="faq-q">Can I copy the converted Hindi text?</p>
+<p class="faq-a">Yes, there's a one-click 'Copy Hindi Text' button that copies the converted text to your clipboard, ready to paste anywhere.</p>
+<p class="faq-q">Is this tool free to use?</p>
+<p class="faq-a">Yes, completely free with unlimited use and no signup required.</p>
+</div>
+</div>
+<button class="back-btn back-btn-bottom" onclick="window.location.href='/'">
+  <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg> Back to All Tools
+</button>
+</div>
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script>
+const CURRENT_TOOL = "hindi";
+const TOOL_URLS = {
+  'home': '/',
+  'gst': '/gst-calculator',
+  'emi': '/emi-calculator',
+  'tax': '/income-tax-calculator',
+  'pdf': '/pdf-compressor',
+  'jpgtopdf': '/jpg-to-pdf',
+  'pdftojpg': '/pdf-to-jpg',
+  'resume': '/resume-builder',
+  'invoice': '/gst-invoice-generator',
+  'age': '/age-calculator',
+  'cgpa': '/cgpa-to-percentage',
+  'img': '/image-compressor',
+  'hindi': '/hindi-typing',
+  'typing': '/typing-test'
+};
+
+
+// ── Sidebar & Nav ──
+function toggleSidebar() {
+  document.getElementById('sidebar').classList.toggle('open');
+}
+const toolTitles = {
+  home: 'Free GST Calculator, EMI Calculator, Income Tax Calculator India | Tools4India',
+  gst: 'GST Calculator India — CGST SGST IGST Calculator Free | Tools4India',
+  emi: 'EMI Calculator — Home, Car & Personal Loan EMI Calculator | Tools4India',
+  tax: 'Income Tax Calculator India — Old vs New Regime FY 2024-25 | Tools4India',
+  pdf: 'Free PDF Compressor Online — Compress PDF for Govt Portals | Tools4India',
+  jpgtopdf: 'JPG to PDF Converter Free Online | Tools4India',
+  pdftojpg: 'PDF to JPG Converter Free Online | Tools4India',
+  resume: 'Free Resume Builder — ATS Friendly Resume Maker India | Tools4India',
+  invoice: 'Free GST Invoice Generator for Freelancers & Small Business | Tools4India',
+  age: 'Age Calculator — Calculate Exact Age in Years Months Days | Tools4India',
+  cgpa: 'CGPA to Percentage Converter — GTU VTU Mumbai University | Tools4India',
+  img: 'Image Compressor Online — Compress Photo for Govt Forms (50KB) | Tools4India',
+  hindi: 'Hindi Typing Tool — Type in Hinglish Get Devanagari Hindi | Tools4India',
+  typing: 'Typing Speed Test Online — Check WPM & Accuracy Free | Tools4India'
+};
+function makeBackBtn(extraClass) {
+  const btn = document.createElement('button');
+  btn.className = 'back-btn' + (extraClass ? ' ' + extraClass : '');
+  btn.innerHTML = '<svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg> Back to All Tools';
+  btn.onclick = () => showTool('home');
+  return btn;
+}
+function addBackButtons() {
+  document.querySelectorAll('.tool-panel').forEach(panel => {
+    if (panel.id === 'panel-home') return; // home pe back button nahi chahiye
+    // Top button — header se upar
+    const header = panel.querySelector('.tool-header');
+    if (header && !panel.querySelector('.back-btn')) {
+      panel.insertBefore(makeBackBtn(), header);
+    }
+    // Bottom button — panel ke sabse end mein
+    if (!panel.querySelector('.back-btn-bottom')) {
+      panel.appendChild(makeBackBtn('back-btn-bottom'));
+    }
+  });
+}
+function showTool(id) {
+  // Standalone multi-page mode: navigate to the real URL for other tools.
+  if (id && id !== CURRENT_TOOL) {
+    window.location.href = TOOL_URLS[id] || '/';
+    return;
+  }
+  if (window.innerWidth <= 768) document.getElementById('sidebar').classList.remove('open');
+}
+
+// ── Helpers ──
+function fmt(n) { return '₹' + Math.round(n).toLocaleString('en-IN'); }
+function fmtN(n) { return Math.round(n).toLocaleString('en-IN'); }
+
+// ── GST CALCULATOR ──
+let gstMode = 'add';
+function setGSTMode(m) {
+  gstMode = m;
+  document.getElementById('gst-add-btn').classList.toggle('active', m === 'add');
+  document.getElementById('gst-rem-btn').classList.toggle('active', m === 'remove');
+  calcGST();
+}
+function calcGST() {
+  const amt = parseFloat(document.getElementById('gst-amount').value);
+  const rate = parseFloat(document.getElementById('gst-rate').value);
+  const type = document.getElementById('gst-type').value;
+  if (!amt || isNaN(amt)) { document.getElementById('gst-result').style.display = 'none'; return; }
+  let base, gstAmt, final;
+  if (gstMode === 'add') { base = amt; gstAmt = amt * rate / 100; final = amt + gstAmt; }
+  else { final = amt; base = amt * 100 / (100 + rate); gstAmt = amt - base; }
+  document.getElementById('gst-result').style.display = 'block';
+  document.getElementById('gst-base').textContent = fmt(base);
+  document.getElementById('gst-final').textContent = fmt(final);
+  if (type === 'intra') {
+    document.getElementById('gst-tax-label').textContent = 'CGST (' + rate/2 + '%)';
+    document.getElementById('gst-tax2-label').textContent = 'SGST (' + rate/2 + '%)';
+    document.getElementById('gst-cgst').textContent = fmt(gstAmt/2);
+    document.getElementById('gst-sgst').textContent = fmt(gstAmt/2);
+  } else {
+    document.getElementById('gst-tax-label').textContent = 'IGST (' + rate + '%)';
+    document.getElementById('gst-tax2-label').textContent = '—';
+    document.getElementById('gst-cgst').textContent = fmt(gstAmt);
+    document.getElementById('gst-sgst').textContent = '—';
+  }
+  document.getElementById('gst-total-tax').textContent = fmt(gstAmt);
+  document.getElementById('gst-words').textContent = 'GST @ ' + rate + '% | Base: ' + fmt(base) + ' | Tax: ' + fmt(gstAmt);
+}
+
+// ── EMI CALCULATOR ──
+function setLoanType(el, type, rate) {
+  document.querySelectorAll('#panel-emi .toggle-btn').forEach(b => b.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('emi-rate').value = rate;
+  updateEMILabel(); calcEMI();
+}
+function updateEMILabel() {
+  const amt = parseInt(document.getElementById('emi-amount').value);
+  const rate = parseFloat(document.getElementById('emi-rate').value);
+  const tenure = parseInt(document.getElementById('emi-tenure').value);
+  document.getElementById('emi-amt-label').textContent = amt.toLocaleString('en-IN');
+  document.getElementById('emi-rate-label').textContent = rate.toFixed(1);
+  document.getElementById('emi-tenure-label').textContent = tenure;
+}
+function calcEMI() {
+  const P = parseInt(document.getElementById('emi-amount').value);
+  const annualRate = parseFloat(document.getElementById('emi-rate').value);
+  const years = parseInt(document.getElementById('emi-tenure').value);
+  const r = annualRate / 12 / 100;
+  const n = years * 12;
+  const emi = r === 0 ? P/n : P * r * Math.pow(1+r,n) / (Math.pow(1+r,n)-1);
+  const totalPay = emi * n;
+  const totalInt = totalPay - P;
+  document.getElementById('emi-monthly').textContent = fmt(emi);
+  document.getElementById('emi-interest').textContent = fmt(totalInt);
+  document.getElementById('emi-total').textContent = fmt(totalPay);
+  document.getElementById('emi-principal').textContent = fmt(P);
+  const pPct = Math.round(P / totalPay * 100);
+  const iPct = 100 - pPct;
+  document.getElementById('emi-p-pct').textContent = pPct + '%';
+  document.getElementById('emi-i-pct').textContent = iPct + '%';
+  document.getElementById('emi-p-bar').style.width = pPct + '%';
+  document.getElementById('emi-i-bar').style.width = iPct + '%';
+  // amortization
+  let balance = P, tbody = '', yr = 1;
+  while (yr <= Math.min(years, 30)) {
+    let yPrincipal = 0, yInterest = 0;
+    for (let m = 0; m < 12 && balance > 0; m++) {
+      const intPay = balance * r;
+      const prinPay = Math.min(emi - intPay, balance);
+      yInterest += intPay; yPrincipal += prinPay; balance -= prinPay;
+    }
+    tbody += `<tr><td>${yr}</td><td>${fmtN(yPrincipal)}</td><td>${fmtN(yInterest)}</td><td>${fmtN(Math.max(0,balance))}</td></tr>`;
+    yr++;
+  }
+  document.getElementById('emi-tbody').innerHTML = tbody;
+}
+
+// ── INCOME TAX ──
+function calcTax() {
+  const income = parseFloat(document.getElementById('tax-income').value);
+  const deductions = parseFloat(document.getElementById('tax-deductions').value) || 0;
+  if (!income) { document.getElementById('tax-result').style.display = 'none'; return; }
+  const age = document.getElementById('tax-age').value;
+
+  function slabTax(taxable, slabs) {
+    let tax = 0;
+    for (const [limit, rate] of slabs) {
+      if (taxable <= 0) break;
+      const chunk = limit === Infinity ? taxable : Math.min(taxable, limit);
+      tax += chunk * rate / 100;
+      taxable -= chunk;
+    }
+    return tax;
+  }
+
+  // Old regime slabs (FY 2024-25)
+  const standardDeduction = 50000;
+  const oldTaxable = Math.max(0, income - standardDeduction - deductions);
+  let oldSlabs;
+  if (age === 'supersenior') oldSlabs = [[500000,0],[500000,20],[Infinity,30]];
+  else if (age === 'senior') oldSlabs = [[300000,0],[200000,5],[300000,20],[Infinity,30]];
+  else oldSlabs = [[250000,0],[250000,5],[500000,20],[Infinity,30]];
+  let oldTax = slabTax(oldTaxable, oldSlabs);
+  if (oldTaxable <= 500000) oldTax = 0; // 87A rebate
+  oldTax += oldTax * 0.04; // 4% cess
+
+  // New regime slabs (FY 2024-25)
+  const newTaxable = Math.max(0, income - 75000); // standard deduction
+  const newSlabs = [[300000,0],[400000,5],[300000,10],[300000,15],[300000,20],[Infinity,30]];
+  let newTax = slabTax(newTaxable, newSlabs);
+  if (newTaxable <= 700000) newTax = 0; // 87A rebate
+  newTax += newTax * 0.04;
+
+  document.getElementById('tax-result').style.display = 'block';
+  document.getElementById('tax-old').textContent = fmt(oldTax);
+  document.getElementById('tax-new').textContent = fmt(newTax);
+  document.getElementById('tax-old-eff').textContent = 'Effective rate: ' + (income > 0 ? (oldTax/income*100).toFixed(1) : 0) + '%';
+  document.getElementById('tax-new-eff').textContent = 'Effective rate: ' + (income > 0 ? (newTax/income*100).toFixed(1) : 0) + '%';
+
+  const saving = Math.abs(oldTax - newTax);
+  const verdictEl = document.getElementById('tax-verdict');
+  if (newTax < oldTax) {
+    document.getElementById('tax-save').textContent = 'New Regime saves you ' + fmt(saving);
+    verdictEl.className = 'result-box success';
+  } else if (oldTax < newTax) {
+    document.getElementById('tax-save').textContent = 'Old Regime saves you ' + fmt(saving);
+    verdictEl.className = 'result-box';
+  } else {
+    document.getElementById('tax-save').textContent = 'Both regimes are equal';
+    verdictEl.className = 'result-box';
+  }
+}
+
+// ── PDF ──
+let pdfMode = 'compress', pdfFiles = [];
+function setPDFMode(el, mode) {
+  pdfMode = mode;
+  document.querySelectorAll('#panel-pdf .toggle-btn').forEach(b => b.classList.remove('active'));
+  el.classList.add('active');
+}
+function handlePDFSelect(inp) {
+  pdfFiles = Array.from(inp.files);
+  const list = document.getElementById('pdf-file-list');
+  list.innerHTML = pdfFiles.map((f,i) => `<div class="file-item">📄 ${f.name}<span class="file-size">${(f.size/1024).toFixed(1)} KB</span><button class="file-remove" onclick="removePDF(${i})">×</button></div>`).join('');
+}
+function removePDF(i) { pdfFiles.splice(i,1); document.getElementById('pdf-file-list').innerHTML = pdfFiles.map((f,j) => `<div class="file-item">📄 ${f.name}<span class="file-size">${(f.size/1024).toFixed(1)} KB</span><button class="file-remove" onclick="removePDF(${j})">×</button></div>`).join(''); }
+function processPDF() {
+  if (!pdfFiles.length) { alert('Please select a PDF file first.'); return; }
+  alert('PDF processing requires a server-side library (pdf-lib). For full implementation, upload this website to a server and add pdf-lib.js. This demo shows the UI flow.');
+}
+
+// ── JPG TO PDF ──
+let j2pFiles = []; // {file, dataUrl}
+function handleJ2PSelect(inp) {
+  const newFiles = Array.from(inp.files);
+  let pending = newFiles.length;
+  if (!pending) return;
+  newFiles.forEach(file => {
+    const reader = new FileReader();
+    reader.onload = e => {
+      j2pFiles.push({ file, dataUrl: e.target.result });
+      pending--;
+      if (pending === 0) renderJ2PThumbs();
+    };
+    reader.readAsDataURL(file);
+  });
+}
+function renderJ2PThumbs() {
+  const wrap = document.getElementById('j2p-thumbs');
+  wrap.innerHTML = j2pFiles.map((item, i) => `
+    <div class="thumb-item">
+      <span class="thumb-num">${i+1}</span>
+      <button class="thumb-remove" onclick="removeJ2P(${i})">×</button>
+      <img src="${item.dataUrl}" alt="page ${i+1}">
+    </div>
+  `).join('');
+  document.getElementById('j2p-options').style.display = j2pFiles.length ? 'block' : 'none';
+}
+function removeJ2P(i) {
+  j2pFiles.splice(i, 1);
+  renderJ2PThumbs();
+}
+function convertJ2P() {
+  if (!j2pFiles.length) { alert('Please select at least one image.'); return; }
+  if (typeof window.jspdf === 'undefined') { alert('PDF library is still loading, please try again in a moment.'); return; }
+  const { jsPDF } = window.jspdf;
+  const pageSizeChoice = document.getElementById('j2p-pagesize').value;
+  const orientationChoice = document.getElementById('j2p-orientation').value;
+
+  let loaded = 0;
+  const imgs = [];
+  j2pFiles.forEach((item, i) => {
+    const img = new Image();
+    img.onload = () => {
+      imgs[i] = img;
+      loaded++;
+      if (loaded === j2pFiles.length) buildPdf(imgs);
+    };
+    img.src = item.dataUrl;
+  });
+
+  function buildPdf(imgs) {
+    let doc;
+    imgs.forEach((img, i) => {
+      const isLandscapeImg = img.width > img.height;
+      let orientation = orientationChoice === 'auto' ? (isLandscapeImg ? 'landscape' : 'portrait') : orientationChoice;
+      let format = pageSizeChoice === 'letter' ? 'letter' : (pageSizeChoice === 'fit' ? [img.width, img.height] : 'a4');
+
+      if (i === 0) {
+        doc = new jsPDF({ orientation: pageSizeChoice === 'fit' ? (isLandscapeImg ? 'landscape':'portrait') : orientation, unit: 'pt', format });
+      } else {
+        doc.addPage(format, pageSizeChoice === 'fit' ? (isLandscapeImg ? 'landscape':'portrait') : orientation);
+      }
+      const pageW = doc.internal.pageSize.getWidth();
+      const pageH = doc.internal.pageSize.getHeight();
+      let drawW, drawH;
+      if (pageSizeChoice === 'fit') {
+        drawW = pageW; drawH = pageH;
+      } else {
+        const scale = Math.min(pageW / img.width, pageH / img.height);
+        drawW = img.width * scale;
+        drawH = img.height * scale;
+      }
+      const x = (pageW - drawW) / 2;
+      const y = (pageH - drawH) / 2;
+      const format2 = item_format(j2pFiles[i].file.name);
+      doc.addImage(img, format2, x, y, drawW, drawH);
+    });
+    doc.save('tools4india_converted.pdf');
+  }
+  function item_format(name) {
+    const ext = name.split('.').pop().toUpperCase();
+    if (ext === 'PNG') return 'PNG';
+    if (ext === 'WEBP') return 'WEBP';
+    return 'JPEG';
+  }
+}
+
+// ── PDF TO JPG ──
+let p2jPdfDoc = null;
+let p2jPages = []; // dataURLs
+if (window['pdfjsLib']) {
+  pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+}
+function handleP2JSelect(inp) {
+  const file = inp.files[0];
+  if (!file) return;
+  document.getElementById('p2j-status').style.display = 'block';
+  document.getElementById('p2j-info').textContent = 'Loading PDF...';
+  document.getElementById('p2j-pages').innerHTML = '';
+  document.getElementById('p2j-download-all').style.display = 'none';
+  p2jPages = [];
+
+  const reader = new FileReader();
+  reader.onload = async function(e) {
+    try {
+      const typedarray = new Uint8Array(e.target.result);
+      p2jPdfDoc = await pdfjsLib.getDocument({ data: typedarray }).promise;
+      document.getElementById('p2j-info').textContent = `${p2jPdfDoc.numPages} page(s) found. Rendering...`;
+      await renderAllPages();
+    } catch (err) {
+      document.getElementById('p2j-info').textContent = 'Could not read this PDF. Please try another file.';
+    }
+  };
+  reader.readAsArrayBuffer(file);
+}
+async function renderAllPages() {
+  const quality = parseFloat(document.getElementById('p2j-quality').value);
+  const wrap = document.getElementById('p2j-pages');
+  wrap.innerHTML = '';
+  p2jPages = [];
+  for (let i = 1; i <= p2jPdfDoc.numPages; i++) {
+    const page = await p2jPdfDoc.getPage(i);
+    const viewport = page.getViewport({ scale: 2 });
+    const canvas = document.createElement('canvas');
+    canvas.width = viewport.width;
+    canvas.height = viewport.height;
+    const ctx = canvas.getContext('2d');
+    await page.render({ canvasContext: ctx, viewport }).promise;
+    const dataUrl = canvas.toDataURL('image/jpeg', quality);
+    p2jPages.push(dataUrl);
+
+    const div = document.createElement('div');
+    div.className = 'thumb-item';
+    div.style.cursor = 'pointer';
+    div.innerHTML = `<span class="thumb-num">${i}</span><img src="${dataUrl}" alt="page ${i}">`;
+    div.onclick = () => downloadOneP2J(i - 1);
+    wrap.appendChild(div);
+  }
+  document.getElementById('p2j-info').textContent = `${p2jPdfDoc.numPages} page(s) ready — click a thumbnail to download that page, or download all below.`;
+  document.getElementById('p2j-download-all').style.display = p2jPages.length ? 'block' : 'none';
+}
+document.addEventListener('change', function(e) {
+  if (e.target && e.target.id === 'p2j-quality' && p2jPdfDoc) {
+    renderAllPages();
+  }
+});
+function downloadOneP2J(i) {
+  const link = document.createElement('a');
+  link.download = `page_${i + 1}.jpg`;
+  link.href = p2jPages[i];
+  link.click();
+}
+function downloadAllP2J() {
+  p2jPages.forEach((dataUrl, i) => {
+    setTimeout(() => downloadOneP2J(i), i * 300);
+  });
+}
+
+// ── RESUME ──
+function updateResume() {
+  const g = id => document.getElementById(id).value;
+  document.getElementById('rv-name').textContent = g('r-name') || 'Your Name';
+  document.getElementById('rv-contact').textContent = [g('r-email'),g('r-phone'),g('r-location')].filter(Boolean).join(' · ') || 'your@email.com · +91 00000 00000 · City';
+  document.getElementById('rv-title-line').textContent = g('r-title');
+  document.getElementById('rv-summary').textContent = g('r-summary') || 'Your professional summary will appear here.';
+  const skills = g('r-skills').split(',').map(s=>s.trim()).filter(Boolean);
+  document.getElementById('rv-skills').innerHTML = skills.map(s=>`<span class="tag">${s}</span>`).join('');
+  document.getElementById('rv-edu-degree').textContent = g('r-edu-degree');
+  document.getElementById('rv-edu-college').textContent = g('r-edu-college');
+  document.getElementById('rv-exp-title').textContent = g('r-exp-title');
+  document.getElementById('rv-exp-period').textContent = g('r-exp-period');
+  document.getElementById('rv-exp-desc').textContent = g('r-exp-desc');
+}
+function printResume() {
+  const w = window.open('','_blank');
+  w.document.write('<html><head><title>Resume</title><style>body{font-family:Arial,sans-serif;max-width:700px;margin:2rem auto;font-size:13px;line-height:1.6}h2{font-size:22px}h3{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:#3B6EF6;border-bottom:1px solid #eee;padding-bottom:4px;margin:14px 0 8px}.tag{display:inline-block;border:1px solid #ddd;border-radius:10px;padding:1px 8px;margin:2px;font-size:11px}@media print{@page{margin:1cm}}</style></head><body>');
+  w.document.write(document.getElementById('resume-preview').innerHTML);
+  w.document.write('</body></html>');
+  w.document.close();
+  w.print();
+}
+
+// ── INVOICE ──
+function addInvoiceRow() {
+  const div = document.createElement('div');
+  div.className = 'inv-item-row grid-2';
+  div.style.cssText = 'gap:8px;margin-bottom:8px';
+  div.innerHTML = '<input type="text" placeholder="Description" class="inv-desc"><input type="number" placeholder="Amount ₹" class="inv-amt" oninput="calcInvoice()">';
+  document.getElementById('inv-items').appendChild(div);
+}
+function calcInvoice() {
+  const amts = Array.from(document.querySelectorAll('.inv-amt')).map(i=>parseFloat(i.value)||0);
+  const sub = amts.reduce((a,b)=>a+b,0);
+  const rate = parseFloat(document.getElementById('inv-gst-rate').value);
+  const gst = sub * rate / 100;
+  document.getElementById('inv-subtotal').textContent = fmt(sub);
+  document.getElementById('inv-cgst').textContent = fmt(gst/2);
+  document.getElementById('inv-sgst').textContent = fmt(gst/2);
+  document.getElementById('inv-total').textContent = fmt(sub+gst);
+}
+function downloadInvoice() {
+  const g = id => document.getElementById(id).value;
+  const amts = Array.from(document.querySelectorAll('.inv-amt')).map(i=>parseFloat(i.value)||0);
+  const descs = Array.from(document.querySelectorAll('.inv-desc')).map(i=>i.value);
+  const sub = amts.reduce((a,b)=>a+b,0);
+  const rate = parseFloat(document.getElementById('inv-gst-rate').value);
+  const gst = sub * rate / 100;
+  const rows = amts.map((a,i)=>`<tr><td>${descs[i]||'—'}</td><td style="text-align:right">₹${a.toLocaleString('en-IN')}</td></tr>`).join('');
+  const w = window.open('','_blank');
+  w.document.write(`<html><head><title>Invoice ${g('inv-num')}</title><style>body{font-family:Arial,sans-serif;max-width:700px;margin:2rem auto;font-size:13px}h1{font-size:28px;color:#3B6EF6}table{width:100%;border-collapse:collapse;margin:1rem 0}th,td{padding:8px;border-bottom:1px solid #eee}th{background:#f8f9fc;text-align:left}.total{font-size:15px;font-weight:700}.grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin:1.5rem 0}@media print{@page{margin:1.5cm}}</style></head><body><h1>TAX INVOICE</h1><div class="grid"><div><b>${g('inv-from-name')||'Your Business'}</b><br>GSTIN: ${g('inv-from-gst')||'—'}<br>${g('inv-from-addr')||'—'}</div><div style="text-align:right">Invoice #: ${g('inv-num')}<br>Date: ${g('inv-date')||new Date().toLocaleDateString('en-IN')}<br><br><b>Bill To:</b><br>${g('inv-to-name')||'—'}<br>${g('inv-to-addr')||'—'}</div></div><table><thead><tr><th>Description</th><th style="text-align:right">Amount</th></tr></thead><tbody>${rows}<tr><td>Subtotal</td><td style="text-align:right">₹${sub.toLocaleString('en-IN')}</td></tr><tr><td>CGST (${rate/2}%)</td><td style="text-align:right">₹${(gst/2).toLocaleString('en-IN')}</td></tr><tr><td>SGST (${rate/2}%)</td><td style="text-align:right">₹${(gst/2).toLocaleString('en-IN')}</td></tr><tr class="total"><td>Total</td><td style="text-align:right;color:#3B6EF6">₹${(sub+gst).toLocaleString('en-IN')}</td></tr></tbody></table></body></html>`);
+  w.document.close(); w.print();
+}
+
+// ── AGE CALCULATOR ──
+document.addEventListener('DOMContentLoaded', () => {
+  const ageTargetEl = document.getElementById('age-target');
+  if (ageTargetEl) ageTargetEl.value = new Date().toISOString().split('T')[0];
+  const invDateEl = document.getElementById('inv-date');
+  if (invDateEl) invDateEl.value = new Date().toISOString().split('T')[0];
+  if (document.getElementById('emi-amount')) calcEMI();
+  if (typeof CURRENT_TOOL !== 'undefined' && CURRENT_TOOL === 'typing') initTypingTest();
+});
+function calcAge() {
+  const dob = new Date(document.getElementById('age-dob').value);
+  const target = new Date(document.getElementById('age-target').value);
+  if (!document.getElementById('age-dob').value) return;
+  let years = target.getFullYear() - dob.getFullYear();
+  let months = target.getMonth() - dob.getMonth();
+  let days = target.getDate() - dob.getDate();
+  if (days < 0) { months--; const prevMonth = new Date(target.getFullYear(), target.getMonth(), 0); days += prevMonth.getDate(); }
+  if (months < 0) { years--; months += 12; }
+  const totalDays = Math.floor((target - dob) / 86400000);
+  document.getElementById('age-result').style.display = 'block';
+  document.getElementById('age-years').textContent = years;
+  document.getElementById('age-months').textContent = months;
+  document.getElementById('age-days').textContent = days;
+  document.getElementById('age-full').textContent = `${years} Years, ${months} Months, ${days} Days`;
+  document.getElementById('age-total-days').textContent = fmtN(totalDays);
+  document.getElementById('age-total-weeks').textContent = fmtN(Math.floor(totalDays/7));
+  document.getElementById('age-total-hours').textContent = fmtN(totalDays*24);
+  const nextBday = new Date(target.getFullYear(), dob.getMonth(), dob.getDate());
+  if (nextBday <= target) nextBday.setFullYear(nextBday.getFullYear()+1);
+  const daysToNext = Math.ceil((nextBday - target) / 86400000);
+  document.getElementById('age-next').textContent = `Next birthday in ${daysToNext} days`;
+}
+
+// ── CGPA ──
+function calcCGPA() {
+  const cgpa = parseFloat(document.getElementById('cgpa-val').value);
+  const uni = document.getElementById('cgpa-uni').value;
+  if (!cgpa || cgpa < 0 || cgpa > 10) { document.getElementById('cgpa-result').style.display = 'none'; return; }
+  const formulas = { gtu: [v=>v*10,'Percentage = CGPA × 10'], vtu: [v=>v*10-7.5,'Percentage = CGPA × 10 − 7.5'], mumbai: [v=>v*7.1+11,'Percentage = CGPA × 7.1 + 11'], anna: [v=>v*10,'Percentage = CGPA × 10'], ggsipu: [v=>v*9.5,'Percentage = CGPA × 9.5'], ptu: [v=>v*10,'Percentage = CGPA × 10'], gen: [v=>v*10,'Percentage = CGPA × 10'] };
+  const [fn, formula] = formulas[uni];
+  const pct = fn(cgpa);
+  document.getElementById('cgpa-result').style.display = 'block';
+  document.getElementById('cgpa-pct').textContent = pct.toFixed(2) + '%';
+  document.getElementById('cgpa-formula').textContent = formula;
+  const grade = cgpa >= 9 ? 'O' : cgpa >= 8 ? 'A+' : cgpa >= 7 ? 'A' : cgpa >= 6 ? 'B+' : cgpa >= 5 ? 'B' : 'C';
+  const cls = pct >= 75 ? 'First Class with Distinction' : pct >= 60 ? 'First Class' : pct >= 50 ? 'Second Class' : 'Pass Class';
+  document.getElementById('cgpa-grade').textContent = grade;
+  document.getElementById('cgpa-class').textContent = cls;
+}
+
+// ── IMAGE COMPRESSOR ──
+let originalFile, imgOriginalData;
+function handleImage(inp) {
+  if (!inp.files[0]) return;
+  originalFile = inp.files[0];
+  const reader = new FileReader();
+  reader.onload = e => {
+    imgOriginalData = e.target.result;
+    const img = new Image();
+    img.onload = () => {
+      const c = document.getElementById('img-original');
+      c.width = img.width; c.height = img.height;
+      c.getContext('2d').drawImage(img,0,0);
+      document.getElementById('img-orig-size').textContent = 'Original: ' + (originalFile.size/1024).toFixed(1) + ' KB';
+      document.getElementById('img-controls').style.display = 'block';
+      compressImage();
+    };
+    img.src = e.target.result;
+  };
+  reader.readAsDataURL(originalFile);
+}
+function compressImage() {
+  if (!imgOriginalData) return;
+  const quality = parseInt(document.getElementById('img-quality').value) / 100;
+  document.getElementById('img-quality-label').textContent = Math.round(quality*100);
+  const img = new Image();
+  img.onload = () => {
+    const c = document.getElementById('img-compressed');
+    c.width = img.width; c.height = img.height;
+    c.getContext('2d').drawImage(img,0,0);
+    const dataUrl = c.toDataURL('image/jpeg', quality);
+    const bytes = Math.round((dataUrl.length - 'data:image/jpeg;base64,'.length) * 3/4);
+    document.getElementById('img-new-size').textContent = 'Compressed: ' + (bytes/1024).toFixed(1) + ' KB (' + Math.round(bytes/originalFile.size*100) + '% of original)';
+  };
+  img.src = imgOriginalData;
+}
+function downloadImage() {
+  const quality = parseInt(document.getElementById('img-quality').value) / 100;
+  const c = document.getElementById('img-compressed');
+  const link = document.createElement('a');
+  link.download = 'compressed_' + (originalFile ? originalFile.name.replace(/\.[^.]+$/,'.jpg') : 'image.jpg');
+  link.href = c.toDataURL('image/jpeg', quality);
+  link.click();
+}
+
+// ── HINDI TYPING ──
+const hindiMap = {
+  'namaskar':'नमस्कार','dhanyavaad':'धन्यवाद','dhanyawad':'धन्यवाद','shukriya':'शुक्रिया',
+  'main':'मैं','mein':'में','mai':'मैं','mujhe':'मुझे','mujko':'मुझको','hamein':'हमें','hum':'हम',
+  'aap':'आप','tum':'तुम','tu':'तू','woh':'वह','wo':'वो','yeh':'यह','ye':'ये','jo':'जो',
+  'hai':'है','hain':'हैं','tha':'था','the':'थे','thi':'थी','hoga':'होगा','hogi':'होगी','hoge':'होंगे',
+  'hoon':'हूँ','hun':'हूँ','ho':'हो','karo':'करो','karna':'करना','karta':'करता','karti':'करती',
+  'kaam':'काम','kab':'कब','kahan':'कहाँ','kyun':'क्यों','kyunki':'क्योंकि','kya':'क्या',
+  'kaise':'कैसे','kaisa':'कैसा','kitna':'कितना','kitne':'कितने',
+  'rehna':'रहना','rehta':'रहता','rehti':'रहती','rehte':'रहते','rahu':'रहूँ',
+  'chahiye':'चाहिए','chahta':'चाहता','chahti':'चाहती',
+  'achha':'अच्छा','accha':'अच्छा','acha':'अच्छा','bura':'बुरा','sahi':'सही','galat':'गलत',
+  'bahut':'बहुत','thoda':'थोड़ा','zyada':'ज़्यादा','kam':'कम','bilkul':'बिल्कुल',
+  'nahi':'नहीं','na':'ना','haan':'हाँ','han':'हाँ','ji':'जी',
+  'ghar':'घर','desh':'देश','india':'भारत','hindi':'हिंदी','bharat':'भारत',
+  'paisa':'पैसा','kaam':'काम','naukri':'नौकरी','school':'स्कूल','padhai':'पढ़ाई',
+  'pita':'पिता','mata':'माता','bhai':'भाई','behen':'बहन','dost':'दोस्त','naam':'नाम',
+  'surat':'सूरत','mumbai':'मुंबई','delhi':'दिल्ली','gujarat':'गुजरात',
+  'aaj':'आज','kal':'कल','abhi':'अभी','jaldi':'जल्दी','baad':'बाद','pehle':'पहले',
+  'please':'कृपया','kripa':'कृपया','maaf':'माफ़','sorry':'माफ़ करें',
+  'likho':'लिखो','likhna':'लिखना','padhna':'पढ़ना','sunna':'सुनना','dekhna':'देखना',
+  'anna':'आना','jana':'जाना','milna':'मिलना','batana':'बताना','samajhna':'समझना',
+  'mera':'मेरा','meri':'मेरी','mere':'मेरे','aapka':'आपका','apna':'अपना',
+  'ek':'एक','do':'दो','teen':'तीन','char':'चार','paanch':'पाँच','das':'दस','sau':'सौ',
+  'sabse':'सबसे','sab':'सब','kuch':'कुछ','bahut':'बहुत'
+};
+function convertHindi() {
+  const text = document.getElementById('hindi-input').value;
+  const words = text.split(/(\s+|[,।.!?\n])/);
+  const converted = words.map(w => {
+    const lower = w.toLowerCase().trim();
+    return hindiMap[lower] || w;
+  });
+  document.getElementById('hindi-output').value = converted.join('');
+}
+function copyHindi() {
+  const text = document.getElementById('hindi-output').value;
+  navigator.clipboard.writeText(text).then(() => alert('Hindi text copied!')).catch(() => { document.getElementById('hindi-output').select(); document.execCommand('copy'); });
+}
+
+// ── TYPING TEST ──
+const typingPassages = [
+  "the quick brown fox jumps over the lazy dog while the sun shines brightly over the green hills and the birds sing softly in the morning breeze near the old wooden bridge that crosses the calm river flowing through the quiet village where farmers wake up early to start their daily work in the fields surrounded by tall trees and colorful flowers that bloom every spring season bringing joy and happiness to everyone who lives there and visits the peaceful countryside during the warm summer days",
+  "success in life depends largely on hard work dedication and the willingness to learn new things every single day no matter how difficult the journey may seem at first because every challenge brings with it a valuable lesson that helps you grow stronger and wiser over time so never give up on your dreams even when the road ahead looks uncertain and remember that consistency and patience are the true keys that unlock every door of opportunity that comes your way in this competitive world",
+  "technology has changed the way people communicate work and live their everyday lives in ways that were unimaginable just a few decades ago from smartphones to artificial intelligence the modern world runs on digital systems that connect millions of people across different countries and cultures instantly allowing businesses to grow faster and individuals to access information within seconds which has made learning new skills easier than ever before for students professionals and entrepreneurs who want to stay ahead in this fast changing digital era",
+  "india is a land of diverse cultures languages and traditions where people from different states celebrate their own unique festivals throughout the year with great enthusiasm and devotion from the colorful lights of diwali to the joyous dances of navratri every celebration reflects the rich heritage passed down through generations the country is also home to numerous historical monuments rivers and mountains that attract millions of tourists every year who come to witness the beauty and spirituality that india has to offer",
+  "practice makes a person perfect and this saying holds true especially when learning a new skill like typing on a keyboard the more you practice the faster and more accurate you become over time many people struggle initially because they look at the keys instead of the screen but with consistent daily practice your fingers eventually memorize the position of each letter allowing you to type without even looking down which greatly improves both your speed and overall confidence while working on a computer"
+];
+let typingState = {
+  passage: '', chars: [], pos: 0, errors: 0, totalTyped: 0,
+  duration: 60, timeLeft: 60, timerId: null, started: false, finished: false
+};
+
+function pickPassage() {
+  return typingPassages[Math.floor(Math.random() * typingPassages.length)];
+}
+
+function initTypingTest() {
+  if (typingState.started && !typingState.finished) return; // resume an in-progress test untouched
+  resetTypingState();
+  renderPassage();
+}
+
+function resetTypingState() {
+  stopTypingTimer();
+  const activeDur = typingState.duration || 60;
+  typingState = {
+    passage: pickPassage(), chars: [], pos: 0, errors: 0, totalTyped: 0,
+    duration: activeDur, timeLeft: activeDur, timerId: null, started: false, finished: false
+  };
+  document.getElementById('typing-hidden-input').value = '';
+  document.getElementById('tt-result-panel').style.display = 'none';
+  document.getElementById('tt-msg').textContent = 'Click on the text above and start typing to begin the test.';
+  document.getElementById('tt-msg').style.display = 'block';
+  updateTypingStatsDisplay();
+}
+
+function setTypingDuration(seconds, el) {
+  document.querySelectorAll('#panel-typing .toggle-group .toggle-btn').forEach(b => b.classList.remove('active'));
+  el.classList.add('active');
+  typingState.duration = seconds;
+  resetTypingState();
+  renderPassage();
+}
+
+function restartTypingTest() {
+  resetTypingState();
+  renderPassage();
+  focusTypingInput();
+}
+
+function renderPassage() {
+  const passageEl = document.getElementById('tt-passage');
+  const text = typingState.passage;
+  let html = '';
+  for (let i = 0; i < text.length; i++) {
+    let cls = 'char-pending';
+    if (i < typingState.pos) {
+      cls = typingState.chars[i] === text[i] ? 'char-correct' : 'char-wrong';
+    } else if (i === typingState.pos) {
+      cls = 'char-current';
+    }
+    const ch = text[i] === ' ' ? '&nbsp;' : text[i];
+    html += `<span class="${cls}">${ch}</span>`;
+  }
+  passageEl.innerHTML = html;
+}
+
+function focusTypingInput() {
+  if (typingState.finished) return;
+  document.getElementById('typing-hidden-input').focus();
+}
+
+function formatTime(sec) {
+  const m = Math.floor(sec / 60).toString().padStart(2, '0');
+  const s = (sec % 60).toString().padStart(2, '0');
+  return `${m}:${s}`;
+}
+
+function updateTypingStatsDisplay() {
+  document.getElementById('tt-time').textContent = formatTime(typingState.timeLeft);
+  const elapsedMin = (typingState.duration - typingState.timeLeft) / 60;
+  const correctChars = typingState.chars.filter((c, i) => c === typingState.passage[i]).length;
+  const wpm = elapsedMin > 0 ? Math.round((correctChars / 5) / elapsedMin) : 0;
+  const accuracy = typingState.totalTyped > 0 ? Math.round((correctChars / typingState.totalTyped) * 100) : 100;
+  document.getElementById('tt-wpm').textContent = wpm;
+  document.getElementById('tt-accuracy').textContent = accuracy + '%';
+  document.getElementById('tt-errors').textContent = typingState.errors;
+}
+
+function startTypingTimer() {
+  if (typingState.timerId) return;
+  typingState.started = true;
+  document.getElementById('tt-msg').style.display = 'none';
+  typingState.timerId = setInterval(() => {
+    typingState.timeLeft--;
+    updateTypingStatsDisplay();
+    if (typingState.timeLeft <= 0) {
+      finishTypingTest();
+    }
+  }, 1000);
+}
+
+function stopTypingTimer() {
+  if (typingState.timerId) {
+    clearInterval(typingState.timerId);
+    typingState.timerId = null;
+  }
+}
+
+function finishTypingTest() {
+  stopTypingTimer();
+  typingState.finished = true;
+  document.getElementById('typing-hidden-input').blur();
+  document.getElementById('typing-hidden-input').disabled = true;
+
+  const correctChars = typingState.chars.filter((c, i) => c === typingState.passage[i]).length;
+  const elapsedMin = Math.max((typingState.duration - typingState.timeLeft), 1) / 60;
+  const wpm = Math.round((correctChars / 5) / elapsedMin);
+  const accuracy = typingState.totalTyped > 0 ? Math.round((correctChars / typingState.totalTyped) * 100) : 100;
+
+  document.getElementById('tt-final-wpm').textContent = wpm;
+  document.getElementById('tt-final-accuracy').textContent = accuracy + '%';
+  document.getElementById('tt-final-chars').textContent = typingState.totalTyped;
+  document.getElementById('tt-final-correct').textContent = correctChars;
+  document.getElementById('tt-final-errors').textContent = typingState.errors;
+  document.getElementById('tt-final-duration').textContent = (typingState.duration / 60) + ' min';
+
+  let headline = 'Great job!';
+  if (wpm >= 70) headline = 'Excellent! Pro-level speed 🚀';
+  else if (wpm >= 50) headline = 'Great job! Above average speed 👏';
+  else if (wpm >= 30) headline = 'Good effort! Keep practicing 💪';
+  else headline = 'Nice start! Practice will boost your speed';
+  document.getElementById('tt-result-headline').textContent = headline;
+
+  document.getElementById('tt-result-panel').style.display = 'block';
+  document.getElementById('tt-result-panel').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+const typingHiddenInputEl = document.getElementById('typing-hidden-input');
+if (typingHiddenInputEl) {
+  typingHiddenInputEl.addEventListener('input', function(e) {
+    if (typingState.finished) return;
+    if (!typingState.started) startTypingTimer();
+
+    const val = e.target.value;
+    const text = typingState.passage;
+
+    // Process every character currently in the input value (handles normal typing,
+    // mobile keyboards, and autocomplete/paste that may insert multiple chars at once).
+    for (let i = 0; i < val.length; i++) {
+      if (typingState.pos >= text.length) break;
+      const newChar = val[i];
+      typingState.chars.push(newChar);
+      typingState.totalTyped++;
+      if (newChar !== text[typingState.pos]) typingState.errors++;
+      typingState.pos++;
+    }
+
+    e.target.value = '';
+    renderPassage();
+    updateTypingStatsDisplay();
+
+    if (typingState.pos >= text.length) {
+      finishTypingTest();
+    }
+
+    const passageEl = document.getElementById('tt-passage');
+    const currentEl = passageEl.querySelector('.char-current');
+    if (currentEl) currentEl.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+  });
+
+  typingHiddenInputEl.addEventListener('keydown', function(e) {
+    if (e.key === 'Tab') e.preventDefault();
+    if (typingState.finished) return;
+    if (e.key === 'Backspace') {
+      e.preventDefault();
+      if (typingState.chars.length > 0) {
+        typingState.chars.pop();
+        typingState.pos = Math.max(0, typingState.pos - 1);
+        renderPassage();
+        updateTypingStatsDisplay();
+      }
+    }
+  });
+}
+
+</script>
+<footer style="padding:20px 24px; border-top:1px solid #E4E7EF; text-align:center; font-size:13px; color:#6B7280; background:#fff; margin-top:20px;">
+<p>© 2026 Tools4India — Free Indian Utility Tools  |  
+  <a href="/privacy.html" style="color:#3B6EF6; text-decoration:none;">Privacy Policy</a>
+</p>
+</footer>
 </body>
 </html>
