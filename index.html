@@ -8,7 +8,7 @@
 <!-- Primary Meta Tags -->
 <meta name="title" content="Free GST Calculator, EMI Calculator, Income Tax Calculator India | Tools4India">
 <meta name="description" content="Free online tools for India — GST Calculator, EMI Calculator, Income Tax Calculator (Old vs New Regime), PDF Compressor, JPG to PDF, Resume Builder, CGPA Converter, Hindi Typing & more. No signup, 100% free, works on mobile.">
-<meta name="keywords" content="GST calculator India, EMI calculator, income tax calculator India, old vs new tax regime calculator, PDF to JPG, JPG to PDF converter, CGPA to percentage converter, GTU CGPA calculator, VTU CGPA calculator, Hindi typing tool, hinglish to hindi converter, free invoice generator India, resume builder free, age calculator, image compressor for govt forms, PDF compressor free">
+<meta name="keywords" content="GST calculator India, EMI calculator, income tax calculator India, old vs new tax regime calculator, PDF to JPG, JPG to PDF converter, CGPA to percentage converter, GTU CGPA calculator, VTU CGPA calculator, Hindi typing tool, hinglish to hindi converter, free invoice generator India, resume builder free, age calculator, image compressor for govt forms, PDF compressor free, typing speed test, typing test online India, WPM calculator">
 <meta name="robots" content="index, follow">
 <meta name="language" content="English">
 <meta name="author" content="Tools4India">
@@ -46,7 +46,7 @@
   "applicationCategory": "UtilitiesApplication",
   "operatingSystem": "Any",
   "offers": { "@type": "Offer", "price": "0", "priceCurrency": "INR" },
-  "featureList": ["GST Calculator","EMI Calculator","Income Tax Calculator","PDF Compressor","JPG to PDF Converter","PDF to JPG Converter","Resume Builder","GST Invoice Generator","Age Calculator","CGPA to Percentage Converter","Image Compressor","Hindi Typing Tool"]
+  "featureList": ["GST Calculator","EMI Calculator","Income Tax Calculator","PDF Compressor","JPG to PDF Converter","PDF to JPG Converter","Resume Builder","GST Invoice Generator","Age Calculator","CGPA to Percentage Converter","Image Compressor","Hindi Typing Tool","Typing Speed Test"]
 }
 </script>
 <style>
@@ -243,6 +243,37 @@
   .thumb-item img { width: 100%; height: 110px; object-fit: cover; display: block; }
   .thumb-item .thumb-num { position: absolute; top: 4px; left: 4px; background: rgba(0,0,0,0.6); color: white; font-size: 11px; padding: 1px 6px; border-radius: 4px; }
   .thumb-item .thumb-remove { position: absolute; top: 4px; right: 4px; background: rgba(220,38,38,0.9); color: white; border: none; width: 20px; height: 20px; border-radius: 50%; font-size: 13px; line-height: 1; cursor: pointer; }
+
+  /* ── Typing Test ── */
+  .typing-stats-bar { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 1.25rem; }
+  @media(max-width:540px){ .typing-stats-bar { grid-template-columns: repeat(2, 1fr); } }
+  .typing-stat { background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 0.75rem 1rem; text-align: center; }
+  .typing-stat .ts-label { font-size: 11px; color: var(--text-tertiary); text-transform: uppercase; letter-spacing: 0.04em; }
+  .typing-stat .ts-value { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 22px; font-weight: 700; color: var(--accent); margin-top: 2px; }
+  .typing-passage {
+    background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius);
+    padding: 1.1rem 1.25rem; font-size: 17px; line-height: 1.9; letter-spacing: 0.2px;
+    user-select: none; cursor: text; min-height: 130px; max-height: 260px; overflow-y: auto;
+    font-family: 'Inter', sans-serif;
+    white-space: normal; word-wrap: break-word; overflow-wrap: break-word;
+  }
+  .typing-passage span { white-space: pre-wrap; display: inline; }
+  .typing-passage .char-correct { color: var(--success); }
+  .typing-passage .char-wrong { color: #DC2626; background: #FEE2E2; border-radius: 2px; }
+  .typing-passage .char-current { background: var(--accent-light); border-bottom: 2px solid var(--accent); border-radius: 2px; }
+  .typing-passage .char-pending { color: var(--text-tertiary); }
+  #typing-hidden-input { position: absolute; opacity: 0; height: 1px; width: 1px; left: -9999px; top: 0; border: none; padding: 0; }
+  .typing-overlay-msg {
+    text-align: center; font-size: 13px; color: var(--text-secondary); margin-top: 0.75rem;
+  }
+  .typing-result-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 1rem; }
+  @media(max-width:540px){ .typing-result-grid { grid-template-columns: 1fr; } }
+  .typing-result-card { background: white; border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem; text-align: center; }
+  .typing-result-card .tr-icon { font-size: 22px; margin-bottom: 4px; }
+  .typing-result-card .tr-value { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 30px; font-weight: 700; color: var(--text-primary); }
+  .typing-result-card .tr-label { font-size: 12px; color: var(--text-secondary); margin-top: 2px; }
+  .typing-result-card.accent .tr-value { color: var(--accent); }
+  .typing-result-card.success .tr-value { color: var(--success); }
 </style>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4715399445372174"
      crossorigin="anonymous"></script>
@@ -257,7 +288,7 @@
     </div>
     Tools4India
   </a>
-  <span class="header-tagline">12 Free Tools for Every Indian</span>
+  <span class="header-tagline">13 Free Tools for Every Indian</span>
   <button class="menu-btn" onclick="toggleSidebar()" aria-label="Toggle menu">
     <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
   </button>
@@ -291,6 +322,7 @@
     <button class="nav-item" id="nav-cgpa" onclick="showTool('cgpa')"><span class="nav-icon">🎓</span> CGPA Converter</button>
     <button class="nav-item" id="nav-img" onclick="showTool('img')"><span class="nav-icon">🖼️</span> Image Compressor</button>
     <button class="nav-item" id="nav-hindi" onclick="showTool('hindi')"><span class="nav-icon">🔤</span> Hindi Typing</button>
+    <button class="nav-item" id="nav-typing" onclick="showTool('typing')"><span class="nav-icon">⌨️</span> Typing Test</button>
   </div>
 </aside>
 
@@ -317,6 +349,7 @@
     <div class="home-card" onclick="showTool('cgpa')"><div class="hc-icon">🎓</div><div class="hc-name">CGPA Converter</div><div class="hc-desc">GTU, VTU, Mumbai Uni & more</div></div>
     <div class="home-card" onclick="showTool('img')"><div class="hc-icon">🖼️</div><div class="hc-name">Image Compressor</div><div class="hc-desc">Compress images for govt portals (50KB limit)</div></div>
     <div class="home-card" onclick="showTool('hindi')"><div class="hc-icon">🔤</div><div class="hc-name">Hindi Typing</div><div class="hc-desc">Type in Hinglish, get Devanagari Hindi</div></div>
+    <div class="home-card" onclick="showTool('typing')"><div class="hc-icon">⌨️</div><div class="hc-name">Typing Test</div><div class="hc-desc">Check your typing speed (WPM) & accuracy</div><span class="hc-badge">New</span></div>
   </div>
  
 </div>
@@ -1062,6 +1095,109 @@
   </div>
 </div>
 
+<!-- ═══════════ TYPING TEST ═══════════ -->
+<div class="tool-panel" id="panel-typing">
+  <div class="tool-header">
+    <div class="tool-eyebrow">Skill Test</div>
+    <div class="tool-title">Typing Speed Test</div>
+    <div class="tool-desc">Check your typing speed (WPM) and accuracy. Choose 1, 3, or 5 minutes and start typing.</div>
+  </div>
+
+  <div class="card">
+    <!-- Duration selector -->
+    <div class="field" style="margin-bottom:1.25rem">
+      <label>Test Duration</label>
+      <div class="toggle-group">
+        <button class="toggle-btn active" id="tt-dur-1" onclick="setTypingDuration(60,this)">1 Minute</button>
+        <button class="toggle-btn" id="tt-dur-3" onclick="setTypingDuration(180,this)">3 Minutes</button>
+        <button class="toggle-btn" id="tt-dur-5" onclick="setTypingDuration(300,this)">5 Minutes</button>
+      </div>
+    </div>
+
+    <!-- Live stats bar -->
+    <div class="typing-stats-bar">
+      <div class="typing-stat">
+        <div class="ts-label">Time Left</div>
+        <div class="ts-value" id="tt-time">01:00</div>
+      </div>
+      <div class="typing-stat">
+        <div class="ts-label">WPM</div>
+        <div class="ts-value" id="tt-wpm">0</div>
+      </div>
+      <div class="typing-stat">
+        <div class="ts-label">Accuracy</div>
+        <div class="ts-value" id="tt-accuracy">100%</div>
+      </div>
+      <div class="typing-stat">
+        <div class="ts-label">Errors</div>
+        <div class="ts-value" id="tt-errors" style="color:#DC2626">0</div>
+      </div>
+    </div>
+
+    <!-- Typing passage -->
+    <div class="typing-passage" id="tt-passage" tabindex="0" onclick="focusTypingInput()"></div>
+    <input type="text" id="typing-hidden-input" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false">
+    <div class="typing-overlay-msg" id="tt-msg">Click on the text above and start typing to begin the test.</div>
+
+    <div style="display:flex;gap:8px;margin-top:1rem;justify-content:center">
+      <button class="btn btn-outline btn-sm" onclick="restartTypingTest()">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M23 4v6h-6M1 20v-6h6"/><path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"/></svg>
+        Restart Test
+      </button>
+    </div>
+
+    <!-- Result panel -->
+    <div id="tt-result-panel" style="display:none;margin-top:1.5rem">
+      <hr class="divider">
+      <div class="result-box success" style="text-align:center">
+        <div class="result-label">Test Completed</div>
+        <div class="result-value success" id="tt-result-headline" style="font-size:22px">Great job!</div>
+      </div>
+      <div class="typing-result-grid">
+        <div class="typing-result-card accent">
+          <div class="tr-icon">⚡</div>
+          <div class="tr-value" id="tt-final-wpm">0</div>
+          <div class="tr-label">Words Per Minute</div>
+        </div>
+        <div class="typing-result-card success">
+          <div class="tr-icon">🎯</div>
+          <div class="tr-value" id="tt-final-accuracy">0%</div>
+          <div class="tr-label">Accuracy</div>
+        </div>
+        <div class="typing-result-card">
+          <div class="tr-icon">⌨️</div>
+          <div class="tr-value" id="tt-final-chars">0</div>
+          <div class="tr-label">Characters Typed</div>
+        </div>
+      </div>
+      <div class="stat-row" style="margin-top:0.75rem">
+        <div class="stat-card"><div class="s-label">Correct Characters</div><div class="s-value" id="tt-final-correct" style="color:var(--success)">0</div></div>
+        <div class="stat-card"><div class="s-label">Errors</div><div class="s-value" id="tt-final-errors" style="color:#DC2626">0</div></div>
+        <div class="stat-card"><div class="s-label">Test Duration</div><div class="s-value" id="tt-final-duration">1 min</div></div>
+      </div>
+      <button class="btn" style="width:100%;margin-top:1rem" onclick="restartTypingTest()">Take Test Again</button>
+    </div>
+  </div>
+
+  <div class="seo-content">
+    <h2>What is a Typing Speed Test?</h2>
+    <p>A typing speed test measures how many words you can type accurately within a fixed amount of time, usually expressed in Words Per Minute (WPM). It also tracks accuracy — the percentage of characters typed correctly compared to the source text — giving you a complete picture of your typing skill.</p>
+    <h2>How WPM is Calculated</h2>
+    <p>WPM is calculated by dividing the total number of correctly typed characters by 5 (the average word length), then dividing by the number of minutes elapsed. For example, typing 250 correct characters in 1 minute gives roughly 50 WPM.</p>
+    <h2>Why Typing Speed Matters</h2>
+    <p>Good typing speed is useful for data entry jobs, government exam typing tests (like SSC, court typist exams), freelance work, and everyday productivity. Most data entry and clerical job exams in India require a minimum typing speed of around 30-35 WPM in English.</p>
+    <h2>Frequently Asked Questions</h2>
+    <p class="faq-q">What is a good typing speed?</p>
+    <p class="faq-a">Average typing speed is around 35-45 WPM. Professional typists and data entry operators typically type at 60-80 WPM or higher, with high accuracy.</p>
+    <p class="faq-q">How is accuracy calculated in this typing test?</p>
+    <p class="faq-a">Accuracy is calculated as the percentage of correctly typed characters out of the total characters you attempted, so fewer mistakes mean higher accuracy.</p>
+    <p class="faq-q">Can I choose how long the test runs?</p>
+    <p class="faq-a">Yes, you can choose a 1 minute, 3 minute, or 5 minute test depending on how much time you want to practice for.</p>
+    <p class="faq-q">Is this typing test free to use?</p>
+    <p class="faq-a">Yes, completely free with unlimited attempts and no signup required.</p>
+  </div>
+</div>
+
 </main>
 
 <!-- jsPDF for JPG to PDF conversion -->
@@ -1087,7 +1223,8 @@ const toolTitles = {
   age: 'Age Calculator — Calculate Exact Age in Years Months Days | Tools4India',
   cgpa: 'CGPA to Percentage Converter — GTU VTU Mumbai University | Tools4India',
   img: 'Image Compressor Online — Compress Photo for Govt Forms (50KB) | Tools4India',
-  hindi: 'Hindi Typing Tool — Type in Hinglish Get Devanagari Hindi | Tools4India'
+  hindi: 'Hindi Typing Tool — Type in Hinglish Get Devanagari Hindi | Tools4India',
+  typing: 'Typing Speed Test Online — Check WPM & Accuracy Free | Tools4India'
 };
 function makeBackBtn(extraClass) {
   const btn = document.createElement('button');
@@ -1123,6 +1260,11 @@ function showTool(id, skipHash) {
   if (toolTitles[id]) document.title = toolTitles[id];
   if (!skipHash) {
     history.replaceState(null, '', id === 'home' ? '/' : '/#' + id);
+  }
+  if (id === 'typing') {
+    initTypingTest();
+  } else {
+    stopTypingTimer();
   }
 }
 // Open the correct tool if URL has a hash like tools4india.com/#gst
@@ -1639,6 +1781,190 @@ function copyHindi() {
   const text = document.getElementById('hindi-output').value;
   navigator.clipboard.writeText(text).then(() => alert('Hindi text copied!')).catch(() => { document.getElementById('hindi-output').select(); document.execCommand('copy'); });
 }
+
+// ── TYPING TEST ──
+const typingPassages = [
+  "the quick brown fox jumps over the lazy dog while the sun shines brightly over the green hills and the birds sing softly in the morning breeze near the old wooden bridge that crosses the calm river flowing through the quiet village where farmers wake up early to start their daily work in the fields surrounded by tall trees and colorful flowers that bloom every spring season bringing joy and happiness to everyone who lives there and visits the peaceful countryside during the warm summer days",
+  "success in life depends largely on hard work dedication and the willingness to learn new things every single day no matter how difficult the journey may seem at first because every challenge brings with it a valuable lesson that helps you grow stronger and wiser over time so never give up on your dreams even when the road ahead looks uncertain and remember that consistency and patience are the true keys that unlock every door of opportunity that comes your way in this competitive world",
+  "technology has changed the way people communicate work and live their everyday lives in ways that were unimaginable just a few decades ago from smartphones to artificial intelligence the modern world runs on digital systems that connect millions of people across different countries and cultures instantly allowing businesses to grow faster and individuals to access information within seconds which has made learning new skills easier than ever before for students professionals and entrepreneurs who want to stay ahead in this fast changing digital era",
+  "india is a land of diverse cultures languages and traditions where people from different states celebrate their own unique festivals throughout the year with great enthusiasm and devotion from the colorful lights of diwali to the joyous dances of navratri every celebration reflects the rich heritage passed down through generations the country is also home to numerous historical monuments rivers and mountains that attract millions of tourists every year who come to witness the beauty and spirituality that india has to offer",
+  "practice makes a person perfect and this saying holds true especially when learning a new skill like typing on a keyboard the more you practice the faster and more accurate you become over time many people struggle initially because they look at the keys instead of the screen but with consistent daily practice your fingers eventually memorize the position of each letter allowing you to type without even looking down which greatly improves both your speed and overall confidence while working on a computer"
+];
+let typingState = {
+  passage: '', chars: [], pos: 0, errors: 0, totalTyped: 0,
+  duration: 60, timeLeft: 60, timerId: null, started: false, finished: false
+};
+
+function pickPassage() {
+  return typingPassages[Math.floor(Math.random() * typingPassages.length)];
+}
+
+function initTypingTest() {
+  if (typingState.started && !typingState.finished) return; // resume an in-progress test untouched
+  resetTypingState();
+  renderPassage();
+}
+
+function resetTypingState() {
+  stopTypingTimer();
+  const activeDur = typingState.duration || 60;
+  typingState = {
+    passage: pickPassage(), chars: [], pos: 0, errors: 0, totalTyped: 0,
+    duration: activeDur, timeLeft: activeDur, timerId: null, started: false, finished: false
+  };
+  document.getElementById('typing-hidden-input').value = '';
+  document.getElementById('tt-result-panel').style.display = 'none';
+  document.getElementById('tt-msg').textContent = 'Click on the text above and start typing to begin the test.';
+  document.getElementById('tt-msg').style.display = 'block';
+  updateTypingStatsDisplay();
+}
+
+function setTypingDuration(seconds, el) {
+  document.querySelectorAll('#panel-typing .toggle-group .toggle-btn').forEach(b => b.classList.remove('active'));
+  el.classList.add('active');
+  typingState.duration = seconds;
+  resetTypingState();
+  renderPassage();
+}
+
+function restartTypingTest() {
+  resetTypingState();
+  renderPassage();
+  focusTypingInput();
+}
+
+function renderPassage() {
+  const passageEl = document.getElementById('tt-passage');
+  const text = typingState.passage;
+  let html = '';
+  for (let i = 0; i < text.length; i++) {
+    let cls = 'char-pending';
+    if (i < typingState.pos) {
+      cls = typingState.chars[i] === text[i] ? 'char-correct' : 'char-wrong';
+    } else if (i === typingState.pos) {
+      cls = 'char-current';
+    }
+    const ch = text[i] === ' ' ? '&nbsp;' : text[i];
+    html += `<span class="${cls}">${ch}</span>`;
+  }
+  passageEl.innerHTML = html;
+}
+
+function focusTypingInput() {
+  if (typingState.finished) return;
+  document.getElementById('typing-hidden-input').focus();
+}
+
+function formatTime(sec) {
+  const m = Math.floor(sec / 60).toString().padStart(2, '0');
+  const s = (sec % 60).toString().padStart(2, '0');
+  return `${m}:${s}`;
+}
+
+function updateTypingStatsDisplay() {
+  document.getElementById('tt-time').textContent = formatTime(typingState.timeLeft);
+  const elapsedMin = (typingState.duration - typingState.timeLeft) / 60;
+  const correctChars = typingState.chars.filter((c, i) => c === typingState.passage[i]).length;
+  const wpm = elapsedMin > 0 ? Math.round((correctChars / 5) / elapsedMin) : 0;
+  const accuracy = typingState.totalTyped > 0 ? Math.round((correctChars / typingState.totalTyped) * 100) : 100;
+  document.getElementById('tt-wpm').textContent = wpm;
+  document.getElementById('tt-accuracy').textContent = accuracy + '%';
+  document.getElementById('tt-errors').textContent = typingState.errors;
+}
+
+function startTypingTimer() {
+  if (typingState.timerId) return;
+  typingState.started = true;
+  document.getElementById('tt-msg').style.display = 'none';
+  typingState.timerId = setInterval(() => {
+    typingState.timeLeft--;
+    updateTypingStatsDisplay();
+    if (typingState.timeLeft <= 0) {
+      finishTypingTest();
+    }
+  }, 1000);
+}
+
+function stopTypingTimer() {
+  if (typingState.timerId) {
+    clearInterval(typingState.timerId);
+    typingState.timerId = null;
+  }
+}
+
+function finishTypingTest() {
+  stopTypingTimer();
+  typingState.finished = true;
+  document.getElementById('typing-hidden-input').blur();
+  document.getElementById('typing-hidden-input').disabled = true;
+
+  const correctChars = typingState.chars.filter((c, i) => c === typingState.passage[i]).length;
+  const elapsedMin = Math.max((typingState.duration - typingState.timeLeft), 1) / 60;
+  const wpm = Math.round((correctChars / 5) / elapsedMin);
+  const accuracy = typingState.totalTyped > 0 ? Math.round((correctChars / typingState.totalTyped) * 100) : 100;
+
+  document.getElementById('tt-final-wpm').textContent = wpm;
+  document.getElementById('tt-final-accuracy').textContent = accuracy + '%';
+  document.getElementById('tt-final-chars').textContent = typingState.totalTyped;
+  document.getElementById('tt-final-correct').textContent = correctChars;
+  document.getElementById('tt-final-errors').textContent = typingState.errors;
+  document.getElementById('tt-final-duration').textContent = (typingState.duration / 60) + ' min';
+
+  let headline = 'Great job!';
+  if (wpm >= 70) headline = 'Excellent! Pro-level speed 🚀';
+  else if (wpm >= 50) headline = 'Great job! Above average speed 👏';
+  else if (wpm >= 30) headline = 'Good effort! Keep practicing 💪';
+  else headline = 'Nice start! Practice will boost your speed';
+  document.getElementById('tt-result-headline').textContent = headline;
+
+  document.getElementById('tt-result-panel').style.display = 'block';
+  document.getElementById('tt-result-panel').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+document.getElementById('typing-hidden-input').addEventListener('input', function(e) {
+  if (typingState.finished) return;
+  if (!typingState.started) startTypingTimer();
+
+  const val = e.target.value;
+  const text = typingState.passage;
+
+  // Process every character currently in the input value (handles normal typing,
+  // mobile keyboards, and autocomplete/paste that may insert multiple chars at once).
+  for (let i = 0; i < val.length; i++) {
+    if (typingState.pos >= text.length) break;
+    const newChar = val[i];
+    typingState.chars.push(newChar);
+    typingState.totalTyped++;
+    if (newChar !== text[typingState.pos]) typingState.errors++;
+    typingState.pos++;
+  }
+
+  e.target.value = '';
+  renderPassage();
+  updateTypingStatsDisplay();
+
+  if (typingState.pos >= text.length) {
+    finishTypingTest();
+  }
+
+  const passageEl = document.getElementById('tt-passage');
+  const currentEl = passageEl.querySelector('.char-current');
+  if (currentEl) currentEl.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+});
+
+document.getElementById('typing-hidden-input').addEventListener('keydown', function(e) {
+  if (e.key === 'Tab') e.preventDefault();
+  if (typingState.finished) return;
+  if (e.key === 'Backspace') {
+    e.preventDefault();
+    if (typingState.chars.length > 0) {
+      typingState.chars.pop();
+      typingState.pos = Math.max(0, typingState.pos - 1);
+      renderPassage();
+      updateTypingStatsDisplay();
+    }
+  }
+});
 </script>
   <!-- Footer -->
 <footer style="padding:20px 24px; border-top:1px solid #E4E7EF; text-align:center; font-size:13px; color:#6B7280; background:#fff; margin-top:20px;">
